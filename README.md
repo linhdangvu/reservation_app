@@ -21,7 +21,7 @@ yarn start
 ```
 
 ### Cours
-Date 24/10/2022
+Date 24/10/2022 \\
 [Cours matin](https://docs.google.com/presentation/d/14YxatS-TM-XbnmC8EtpOcnL9QEDJuRo0AZ-IiprRQsM/edit)
 [Cours apres-midi](https://docs.google.com/presentation/d/1K-YcuKeVGqGApW-cCNz_-HTJzabrqlXwzAqOucPzITs/edit)
 
