@@ -12,7 +12,7 @@ export function verifPassword(password: string) {
 export function verifEmail(email: string) {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (email == "" || email.length < 3 || !reg.test(email)) {
-        return "Vous devez entrer une adresse email valide.";
+        return "Enter valid email";
     }
     // if (email != user.email) {
     //     return "There are no email like this.";

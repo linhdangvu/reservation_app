@@ -79,7 +79,7 @@ export default function LoginForm() {
                 <Text style={styles.textFooter}>New around here ?
                     <Text onPress={() => { navigation.navigate('Inscription') }} style={styles.sousTextFooter}>Sign Up</Text>
                 </Text>
-                <Text style={styles.textFooter}>Forgot Password ?</Text>
+                <Text style={styles.textFooter}>Forgot your Password ?</Text>
             </View>
         </View>
     )

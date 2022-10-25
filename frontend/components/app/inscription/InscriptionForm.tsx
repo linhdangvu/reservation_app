@@ -1,7 +1,7 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
+import { verifEmail, verifPassword,verifPasswordconfirm } from '../../../helpers/SignUpHelpers';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -9,7 +9,10 @@ export default function InscriptionForm() {
     const navigation = useNavigation()
 
     const [email, setEmail] = useState("")
+    const [firstname, setFirstName] = useState("")
+    const [lastname, setLastName] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordconfirm, setPasswordconfirm] = useState("")
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
 
@@ -46,6 +49,23 @@ export default function InscriptionForm() {
 
     return (
         <View style={styles.containers}>
+            <Text style={styles.labelText}>First Name:</Text>
+            <View style={styles.inputLine}>
+                <TextInput style={styles.textInput}
+                    value={firstname}
+                    onChangeText={setFirstName} />
+            </View>
+
+
+            <Text style={styles.labelText}>Last Name:</Text>
+            <View style={styles.inputLine}>
+                <TextInput style={styles.textInput}
+                    value={lastname}
+                    onChangeText={setLastName} />
+            </View>
+
+
+
             <Text style={styles.labelText}>Email:</Text>
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
@@ -53,6 +73,9 @@ export default function InscriptionForm() {
                     onChangeText={setEmail}
                     placeholder="email@example.com" />
             </View>
+
+
+
             <Text style={styles.labelText}>Password:</Text>
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
@@ -60,26 +83,28 @@ export default function InscriptionForm() {
                     onChangeText={setPassword}
                     placeholder="Password" />
             </View>
+
+
+
+            <Text style={styles.labelText}>Confirm password:</Text>
+            <View style={styles.inputLine}>
+                <TextInput style={styles.textInput}
+                    value={passwordconfirm}
+                    onChangeText={setPasswordconfirm}
+                    placeholder="Password confirmation" />
+            </View>
+
+
+
             {errors.map((item: String, index) => {
                 return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 10 }}>{item}</Text>
             })}
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    value={isSelected}
-                    onValueChange={setSelection}
-                    style={styles.checkbox}
-                />
-                <Text style={styles.labelCheckBox}>Remember Me</Text>
-            </View>
+
             <TouchableHighlight style={styles.button}
                 onPress={verifLogin}>
                 <Text style={styles.buttonText}>Sign in</Text>
             </TouchableHighlight>
             <View style={styles.footerLogin}>
-                <Text style={styles.textFooter}>New around here ?
-                    <Text onPress={() => { navigation.navigate('Main') }} style={styles.sousTextFooter}>Sign Up</Text>
-                </Text>
-                <Text style={styles.textFooter}>Forgot Password ?</Text>
             </View>
         </View>
     )

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, ScrollView, StyleSheet } from 'react-native';
+import { ImageBackground, Platform, ScrollView, StyleSheet } from 'react-native';
 import * as React from 'react';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Button, Text, View } from '../components/Themed';
@@ -24,6 +24,7 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
   }
 
   return (
+    
     <View style={styles.container}>
       <Text style={styles.title}>Accueil</Text>
       <ScrollView style={styles.articlieView} contentContainerStyle={{ flex: 1 }}>
@@ -35,6 +36,7 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
       {!token ?
         <Button onPress={() => { navigation.navigate("Login") }} text="Login" />
         : <><Button onPress={logout} text="Logout" /><View /></>
+
       }
     </View>
   );
