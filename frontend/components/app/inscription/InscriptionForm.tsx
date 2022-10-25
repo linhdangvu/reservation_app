@@ -1,7 +1,7 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
+import { verifEmail, verifPassword,verifPasswordconfirm } from '../../../helpers/SignUpHelpers';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,6 +12,7 @@ export default function InscriptionForm() {
     const [firstname, setFirstName] = useState("")
     const [lastname, setLastName] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordconfirm, setPasswordconfirm] = useState("")
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
 
@@ -88,9 +89,9 @@ export default function InscriptionForm() {
             <Text style={styles.labelText}>Confirm password:</Text>
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder="Password" />
+                    value={passwordconfirm}
+                    onChangeText={setPasswordconfirm}
+                    placeholder="Password confirmation" />
             </View>
 
 
