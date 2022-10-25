@@ -1,23 +1,23 @@
 [
     {
         "id": 1,
-        "image": "https://media.ouest-france.fr/v1/pictures/MjAyMDExNjM1YzM2YmMwMDFhMWU4OGIyZWZmZWE4NDFjNjE1OGM?width=480&focuspoint=50%2C25&cropresize=1&client_id=bpeditorial&sign=bf01a6b67a18051ee623fe382e8d0cbd37e59043576626efbf53b4d4ebd5c0b2",
-        "title": "One piece",
-        "description": "This is one piece",
+        "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg",
+        "title": "Tarot",
+        "description": "Tarot reading with Lucia",
         "link": "https://reactnative.dev/docs/linking"
     },
     {
         "id": 2,
-        "image": "https://ih1.redbubble.net/image.1436243565.9161/st,small,507x507-pad,600x600,f8f8f8.jpg",
-        "title": "Dinosaur",
-        "description": "This is dinosaur",
+        "image": "https://images5.alphacoders.com/507/thumb-1920-507388.jpg",
+        "title": "Cristal reading",
+        "description": "future prediction with Maria",
         "link": "https://reactnative.dev/docs/linking"
     },
     {
         "id": 3,
-        "image": "https://www.pokepedia.fr/images/thumb/d/d1/Pikachu_de_Sacha.png/1200px-Pikachu_de_Sacha.png",
-        "title": "Pikachu",
-        "description": "This is pikachu",
+        "image": "https://media.istockphoto.com/photos/palmistry-picture-id1137107858?k=20&m=1137107858&s=612x612&w=0&h=qXHVIXXM8c40o8ojUQxH05ej6n-tcCxAuikhIhE6ckA=",
+        "title": "Hand Reading",
+        "description": "Read your destiny with Yana",
         "link": "https://reactnative.dev/docs/linking"
     }
 ]
