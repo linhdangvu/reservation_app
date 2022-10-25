@@ -1,8 +1,9 @@
 import { Text, View } from '../../Themed';
-import { Image, StyleSheet, TouchableOpacity, Button } from 'react-native'
+import { Image, StyleSheet, TouchableOpacity, Button, Linking } from 'react-native'
 import { RootStackScreenProps } from '../../../types';
 import { useNavigation } from '@react-navigation/native';
 import { ArticleProps } from './ArticleItem'
+import { FontAwesome } from '@expo/vector-icons';
 
 const ArticleDetails = ({ article }: { article: ArticleProps }) => {
 
@@ -22,9 +23,16 @@ const ArticleDetails = ({ article }: { article: ArticleProps }) => {
                     {article.description}
                 </Text>
             </View>
+            <View style={{ backgroundColor: 'white', flex: 1, alignItems: 'flex-end' }}>
+                <Text style={styles.textUrl} onPress={() => Linking.openURL(article.link)}>
+                    <FontAwesome size={30} name={'share-alt'} />
+                </Text>
+            </View>
+            <View style={{ backgroundColor: 'white', flex: 1 }}>
+                <TouchableOpacity activeOpacity={0.5} style={styles.btnRetour} onPress={() => navigation.goBack()}>Retour</TouchableOpacity>
+            </View>
 
-            <TouchableOpacity activeOpacity={0.5} style={styles.btnRetour} onPress={() => navigation.goBack()}>Retour</TouchableOpacity>
-        </View>
+        </View >
     )
 }
 
@@ -35,14 +43,14 @@ const styles = StyleSheet.create({
         //   paddingTop: 50,
         backgroundColor: 'white',
         margin: 10,
-
-
+        flex: 1
     },
     text: {
         border: 'solid 1px gray',
         backgroundColor: 'white',
         marginTop: 20,
-        padding: 10
+        padding: 10,
+        flex: 1
     },
     textTitle: {
         color: 'black',
@@ -63,5 +71,14 @@ const styles = StyleSheet.create({
         width: 'fit-content',
         paddingHorizontal: 10,
         paddingVertical: 5
+    },
+    textUrl: {
+        color: 'black',
+        marginTop: 5,
+        border: 'solid 1px black',
+        width: 'fit-content',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+
     }
 });
