@@ -5,7 +5,7 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { Button, Text, View } from '../components/Themed';
 import { UserContext } from '../contexts/UserContext';
 import { RootStackScreenProps } from '../types';
-import ArticleItem, { ArticleProps } from '../components/acceuil/ArticleItem';
+import ArticleItem, { ArticleProps } from '../components/app/articles/ArticleItem';
 import data from "../data/articles.json"
 
 

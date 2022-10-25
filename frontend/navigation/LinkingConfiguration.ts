@@ -29,6 +29,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       },
       Main: 'main',
       Article: 'article',
+      ArticleDetails: 'article/details',
       Login: 'login',
       Inscription: 'inscription',
       Modal: 'modal',

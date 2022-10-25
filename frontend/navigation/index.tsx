@@ -14,6 +14,7 @@ import { Header } from '../components/Themed';
 import Colors from '../constants/Colors';
 import { UserContext, UserContextProvider } from '../contexts/UserContext';
 import useColorScheme from '../hooks/useColorScheme';
+import ArticleDetailScreen from '../screens/ArticleDetailScreen';
 import ArticleScreen from '../screens/ArticleScreen';
 import InscriptionScreen from '../screens/InscriptionScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -46,18 +47,19 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const {token} = React.useContext(UserContext);
-  if(!token){
+  const { token } = React.useContext(UserContext);
+  if (!token) {
     return (
       <Stack.Navigator>
         <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Article" component={ArticleScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="ArticleDetails" component={ArticleDetailScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Inscription" component={InscriptionScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       </Stack.Navigator>
     );
-  }else{
+  } else {
     return (
       <Stack.Navigator>
         <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
@@ -88,7 +90,7 @@ function BottomTabNavigator() {
         component={MainScreen}
         options={{
           title: 'Accueil',
-          headerShown:false,
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
         }}
       />

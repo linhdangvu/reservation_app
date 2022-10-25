@@ -2,19 +2,19 @@
     {
         "id": 1,
         "image": "https://media.ouest-france.fr/v1/pictures/MjAyMDExNjM1YzM2YmMwMDFhMWU4OGIyZWZmZWE4NDFjNjE1OGM?width=480&focuspoint=50%2C25&cropresize=1&client_id=bpeditorial&sign=bf01a6b67a18051ee623fe382e8d0cbd37e59043576626efbf53b4d4ebd5c0b2",
-        "title": "title 1",
+        "title": "One piece",
         "description": "This is one piece"
     },
     {
         "id": 2,
         "image": "https://ih1.redbubble.net/image.1436243565.9161/st,small,507x507-pad,600x600,f8f8f8.jpg",
-        "title": "title 2",
+        "title": "Dinosaur",
         "description": "This is dinosaur"
     },
     {
         "id": 3,
         "image": "https://www.pokepedia.fr/images/thumb/d/d1/Pikachu_de_Sacha.png/1200px-Pikachu_de_Sacha.png",
-        "title": "title 3",
+        "title": "Pikachu",
         "description": "This is pikachu"
     }
 ]

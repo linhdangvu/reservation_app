@@ -1,5 +1,7 @@
-import { Button, Text, View } from '../Themed';
-import { Image, StyleSheet } from 'react-native'
+import { Text, View } from '../../Themed';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { RootStackScreenProps } from '../../../types';
+import { useNavigation } from '@react-navigation/native';
 
 export type ArticleProps = {
     image: string;
@@ -7,17 +9,27 @@ export type ArticleProps = {
     description: string;
 };
 
+
 const ArticleItem = ({ article }: { article: ArticleProps }) => {
 
+    const navigation = useNavigation()
+
     return (
-        <Button style={styles.container} onPress={() => { showArticleInfo() }}>
+        <TouchableOpacity activeOpacity={0.9} style={styles.container}
+            onPress={() => {
+                // navigation.navigate('Login');
+                console.log("Go to detail");
+                navigation.navigate('ArticleDetails', {
+                    item: article
+                })
+            }}>
             <Image
                 style={styles.stretch}
                 source={{ uri: article.image }} />
             <Text style={styles.textDescription}>
-                {article.description}
+                {article.title}
             </Text>
-        </Button>
+        </TouchableOpacity>
     )
 }
 
