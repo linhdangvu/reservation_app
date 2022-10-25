@@ -8,8 +8,8 @@ import { RootTabScreenProps } from '../types';
 export default function CalendarScreen({ navigation }: RootTabScreenProps<'Calendar'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Calendar</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      {/* <Text style={styles.title}>Calendar</Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" /> */}
       <Calendar />
       {/* <EditScreenInfo path="/screens/TabOneScreen.tsx" /> */}
     </View>
@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    backgroundColor: 'white'
   },
   title: {
     fontSize: 20,
