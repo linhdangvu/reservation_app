@@ -3,7 +3,7 @@ import React from 'react';
 // Declaring the state object globally.
 const initialUserState = {
   // token: "azertjgodifsq",//localStorage.getItem("token"),
-  token: "",
+  token: localStorage.getItem("token"),
   refeshToken: localStorage.getItem("refeshToken"),
 };
 
@@ -31,7 +31,7 @@ interface State {
   context: Context;
 }
 
-export class UserContextProvider extends React.Component<{children?: React.ReactNode;}, {}> {
+export class UserContextProvider extends React.Component<{ children?: React.ReactNode; }, {}> {
   state: State = {
     context: userContextWrapper(this),
   };

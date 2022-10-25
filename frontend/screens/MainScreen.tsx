@@ -11,8 +11,18 @@ import data from "../data/articles.json"
 
 
 export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>) {
-
   const { token } = React.useContext(UserContext);
+
+  const logout = () => {
+    if (typeof (Storage) !== 'undefined') {
+      localStorage.removeItem('token');
+      window.location.href = "main"
+    } else {
+      alert("No support storage")
+    }
+
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Accueil</Text>
@@ -23,8 +33,8 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
       </ScrollView>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       {!token ?
-        <Button onPress={() => { navigation.navigate("Login"); console.log('This is login') }} text="Login" />
-        : <View />
+        <Button onPress={() => { navigation.navigate("Login") }} text="Login" />
+        : <><Button onPress={logout} text="Logout" /><View /></>
       }
     </View>
   );
