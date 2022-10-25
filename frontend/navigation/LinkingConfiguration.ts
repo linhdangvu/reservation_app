@@ -20,9 +20,24 @@ const linking: LinkingOptions<RootStackParamList> = {
               TabOneScreen: 'one',
             },
           },
-          TabTwo: {
+          Panier: {
             screens: {
-              TabTwoScreen: 'two',
+              PanierScreen: 'panier',
+            },
+          },
+          Calendar: {
+            screens: {
+              CalendarScreen: 'calendar',
+            },
+          },
+          Message: {
+            screens: {
+              MessageScreen: 'message',
+            },
+          },
+          Profile: {
+            screens: {
+              ProfileScreen: 'profile',
             },
           },
         },
@@ -31,6 +46,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       Article: 'article',
       ArticleDetails: 'article/details',
       Login: 'login',
+      // Panier: 'panier',
       Inscription: 'inscription',
       Modal: 'modal',
       NotFound: '*',

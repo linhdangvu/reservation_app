@@ -16,11 +16,15 @@ import { UserContext, UserContextProvider } from '../contexts/UserContext';
 import useColorScheme from '../hooks/useColorScheme';
 import ArticleDetailScreen from '../screens/ArticleDetailScreen';
 import ArticleScreen from '../screens/ArticleScreen';
+import CalendarScreen from '../screens/CalendarScreen';
 import InscriptionScreen from '../screens/InscriptionScreen';
 import LoginScreen from '../screens/LoginScreen';
 import MainScreen from '../screens/MainScreen';
+import MessageScreen from '../screens/MessageScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import PanierScreen from '../screens/PanierScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { login } from '../services/AuthService';
@@ -96,19 +100,35 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
+        name="Panier"
+        component={PanierScreen}
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Panier',
+          tabBarIcon: ({ color }) => <TabBarIcon name="shopping-basket" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Calendar"
+        component={CalendarScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Calendar',
+          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Message"
+        component={MessageScreen}
+        options={{
+          title: 'Message',
+          tabBarIcon: ({ color }) => <TabBarIcon name="wechat" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </BottomTab.Navigator>

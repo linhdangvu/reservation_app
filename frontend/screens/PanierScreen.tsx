@@ -1,17 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
-import InscriptionForm from '../components/app/inscription/InscriptionForm';
+import { StyleSheet } from 'react-native';
+import Panier from '../components/app/panier/Panier';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import { RootStackScreenProps } from '../types';
+import { RootTabScreenProps } from '../types';
 
-export default function InscriptionScreen({ navigation }: RootStackScreenProps<'Inscription'>) {
+export default function PanierScreen({ navigation }: RootTabScreenProps<'Panier'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Inscription</Text>
+      <Text style={styles.title}>Panier</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <InscriptionForm />
+      <Panier />
+      {/* <EditScreenInfo path="/screens/TabOneScreen.tsx" /> */}
     </View>
   );
 }
@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
   },
   title: {
     fontSize: 20,

@@ -5,7 +5,7 @@ import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function LoginForm() {
+export default function InscriptionForm() {
     const navigation = useNavigation()
 
     const [email, setEmail] = useState("")
@@ -77,7 +77,7 @@ export default function LoginForm() {
             </TouchableHighlight>
             <View style={styles.footerLogin}>
                 <Text style={styles.textFooter}>New around here ?
-                    <Text onPress={() => { navigation.navigate('Inscription') }} style={styles.sousTextFooter}>Sign Up</Text>
+                    <Text onPress={() => { navigation.navigate('Main') }} style={styles.sousTextFooter}>Sign Up</Text>
                 </Text>
                 <Text style={styles.textFooter}>Forgot Password ?</Text>
             </View>
