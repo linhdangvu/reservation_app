@@ -52,8 +52,8 @@ export function Header(props: ViewProps) {
 
   return <View style={[{ backgroundColor: Colors[selectedTheme].background, flexDirection:"row", alignItems:"center"}, style]} {...otherProps}>
             <Image style={{width:50, height:50, margin:20}}
-                   source={require("../assets/images/icon.png")}/>
-            <Text style={{color:Colors[selectedTheme].text, textAlign:"center", flex:1}}>APP Title</Text>
+                   source={require("../assets/images/cauldron.png")}/>
+            <Text style={{color:Colors[selectedTheme].text, textAlign:"center", flex:1}}>Wizz Fortune Telling</Text>
 
           </View>;
 }
