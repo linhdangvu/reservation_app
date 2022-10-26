@@ -1,0 +1,40 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "lastname": "TEST ",
+            "firstname": "One",
+            "email": "test@test.com",
+            "password": "1234",
+            "role": "admin",
+            "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
+        },
+        {
+            "id": 2,
+            "lastname": "TEST ",
+            "firstname": "Two",
+            "email": "test2@test.com",
+            "password": "1234",
+            "role": "client",
+            "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
+        },
+        {
+            "id": 3,
+            "lastname": "TEST ",
+            "firstname": "Three",
+            "email": "test3@test.com",
+            "password": "1234",
+            "role": "client",
+            "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
+        },
+        {
+            "id": 4,
+            "lastname": "TEST ",
+            "firstname": "Four",
+            "email": "test4@test.com",
+            "password": "1234",
+            "role": "client",
+            "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
+        }
+    ]
+}

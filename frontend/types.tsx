@@ -22,6 +22,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
+  ChatBox: undefined;
   // Panier: undefined;
 };
 
@@ -39,6 +40,7 @@ export type RootTabParamList = {
   Calendar: undefined;
   Message: undefined;
   Profile: undefined;
+
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

@@ -46,7 +46,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       Article: 'article',
       ArticleDetails: 'article/details',
       Login: 'login',
-      // Panier: 'panier',
+      ChatBox: 'chatbox',
       Inscription: 'inscription',
       Modal: 'modal',
       NotFound: '*',
