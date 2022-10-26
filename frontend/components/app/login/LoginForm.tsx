@@ -19,6 +19,7 @@ export default function LoginForm() {
         }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
+            localStorage.setItem("email",email)
             console.log(email)
             setUserInfo(email)
             window.location.href = "main"

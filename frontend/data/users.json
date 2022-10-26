@@ -5,6 +5,7 @@
             "lastname": "TEST ",
             "firstname": "One",
             "email": "test@test.com",
+            "phone": "06 71 98 76 54",
             "password": "1234",
             "role": "admin",
             "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
@@ -14,6 +15,7 @@
             "lastname": "TEST ",
             "firstname": "Two",
             "email": "test2@test.com",
+            "phone": "06 71 11 78 98",
             "password": "1234",
             "role": "client",
             "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
@@ -23,6 +25,7 @@
             "lastname": "TEST ",
             "firstname": "Three",
             "email": "test3@test.com",
+            "phone": "07 54 71 98 07",
             "password": "1234",
             "role": "client",
             "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
@@ -32,6 +35,7 @@
             "lastname": "TEST ",
             "firstname": "Four",
             "email": "test4@test.com",
+            "phone": "07 77 87 67 56",
             "password": "1234",
             "role": "client",
             "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
