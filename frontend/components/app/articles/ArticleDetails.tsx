@@ -1,5 +1,5 @@
 import { Text, View } from '../../Themed';
-import { Image, StyleSheet, TouchableOpacity, Button, Linking } from 'react-native'
+import { StyleSheet, TouchableOpacity, Button, Linking, Text as DefaultText, View as DefaultView, Image, Pressable, PressableProps } from 'react-native'
 import { RootStackScreenProps } from '../../../types';
 import { useNavigation } from '@react-navigation/native';
 import { ArticleProps } from './ArticleItem'
@@ -27,11 +27,11 @@ const ArticleDetails = ({ article }: { article: ArticleProps }) => {
                 </Text>
 
             </View>
-            
+
             <Text style={styles.textUrl} onPress={() => Linking.openURL(article.link)}>
-                    <FontAwesome size={30} name={'share-alt'} />
+                <FontAwesome size={30} name={'share-alt'} />
             </Text>
-            
+
             <TouchableOpacity activeOpacity={0.5} style={styles.btnRetour} onPress={() => navigation.goBack()}>Retour</TouchableOpacity>
 
             {/*
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
         width: '75%',
         maxWidth: '750px',
         minWidth: '250px',
-        
     },
     text: {
         border: 'solid 1px gray',
@@ -70,8 +69,8 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 10,
         height: '40vw',
-       // maxHeight:'210px',
-        minHeight:'180px',
+        // maxHeight:'210px',
+        minHeight: '180px',
         textAlign: 'center',
 
     },
@@ -91,8 +90,8 @@ const styles = StyleSheet.create({
     stretch: {
         //width: 'inherit',
         height: '40vw',
-        maxHeight:'300px',
-        minHeight:'180px',
+        maxHeight: '300px',
+        minHeight: '180px',
         resizeMode: 'stretch',
         borderRadius: 10,
     },
@@ -115,5 +114,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginTop: '15px',
 
+    },
+    textRetour: {
+        color: 'black',
     }
 });

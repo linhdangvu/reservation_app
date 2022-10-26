@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
     stretch: {
         width: 'inherit',
         height: '40vw',
-        maxHeight:'300px',
-        minHeight:'180px',
+        maxHeight: '300px',
+        minHeight: '180px',
         resizeMode: 'stretch',
-        borderTopStartRadius : 10,
+        borderTopStartRadius: 10,
         borderTopEndRadius: 10
     },
 });

@@ -1,7 +1,7 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
+import { verifEmail, verifPassword, verifUsers, setUserInfo } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -13,18 +13,13 @@ export default function LoginForm() {
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
 
-    // login temporaire
-    const user = {
-        email: "test@test.com",
-        password: "1234"
-    }
-
     const login = ({ email, password }: { email: string, password: string }) => {
         if (isSelected) {
             console.log("Need to set cookie")
         }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
+            setUserInfo(email)
             window.location.href = "main"
         } else {
             alert("No support storage")
@@ -37,7 +32,7 @@ export default function LoginForm() {
         let errorsForm = [];
         if (errorPassword != "") errorsForm.push(errorPassword);
         if (errorEmail != "") errorsForm.push(errorEmail)
-        if (email != user.email && password != user.password) errorsForm.push("Email or password not correct")
+        if (!verifUsers(email, password)) errorsForm.push("Email or password not correct")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
             login({ password: password, email: email })
@@ -117,7 +112,6 @@ const styles = StyleSheet.create({
         padding: 10,
         flex: 1,
         //backgroundColor: "white"
-
     },
     button: {
         backgroundColor: '#0096FF',
@@ -141,7 +135,6 @@ const styles = StyleSheet.create({
     checkbox: {
         alignSelf: "center",
         backgroundColor: "inherit",
-
     },
     labelCheckBox: {
         color: 'black',

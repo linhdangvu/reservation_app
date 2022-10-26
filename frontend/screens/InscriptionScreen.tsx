@@ -9,7 +9,7 @@ import { RootStackScreenProps } from '../types';
 export default function InscriptionScreen({ navigation }: RootStackScreenProps<'Inscription'>) {
   return (
     <View style={styles.container}>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      {/* <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" /> */}
       <InscriptionForm />
     </View>
   );

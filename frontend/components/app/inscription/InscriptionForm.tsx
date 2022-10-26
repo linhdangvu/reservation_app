@@ -1,7 +1,7 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
+import { verifEmail, verifPassword, verifUsers } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,6 +12,7 @@ export default function InscriptionForm() {
     const [firstname, setFirstName] = useState("")
     const [lastname, setLastName] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordconfirm, setPasswordconfirm] = useState("")
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
 
@@ -39,7 +40,8 @@ export default function InscriptionForm() {
         let errorsForm = [];
         if (errorPassword != "") errorsForm.push(errorPassword);
         if (errorEmail != "") errorsForm.push(errorEmail)
-        if (email != user.email && password != user.password) errorsForm.push("Email or password not correct")
+        if (password !== passwordconfirm) errorsForm.push("Password is the same")
+        if (verifUsers(email, password)) errorsForm.push("Email or password exit")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
             login({ password: password, email: email })
@@ -52,8 +54,8 @@ export default function InscriptionForm() {
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
                     value={firstname}
-                    onChangeText={setFirstName} 
-                    placeholder="First Name"/>
+                    onChangeText={setFirstName}
+                    placeholder="First Name" />
             </View>
 
 
@@ -61,8 +63,8 @@ export default function InscriptionForm() {
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
                     value={lastname}
-                    onChangeText={setLastName} 
-                    placeholder="Last Name"/>
+                    onChangeText={setLastName}
+                    placeholder="Last Name" />
             </View>
 
 
@@ -91,9 +93,9 @@ export default function InscriptionForm() {
             <Text style={styles.labelText}>Confirm password:</Text>
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
-                    value={password}
+                    value={passwordconfirm}
                     secureTextEntry={true}
-                    onChangeText={setPassword}
+                    onChangeText={setPasswordconfirm}
                     placeholder="Password" />
             </View>
 
