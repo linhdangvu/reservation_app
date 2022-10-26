@@ -25,37 +25,25 @@ const ArticleDetails = ({ article }: { article: ArticleProps }) => {
                 <Text style={styles.textDetails}>
                     {article.details}
                 </Text>
-<<<<<<< HEAD
 
             </View>
 
-=======
-            </View>
->>>>>>> main
             <Text style={styles.textUrl} onPress={() => Linking.openURL(article.link)}>
                 <FontAwesome size={30} name={'share-alt'} />
             </Text>
 
             <TouchableOpacity activeOpacity={0.5} style={styles.btnRetour} onPress={() => navigation.goBack()}>Retour</TouchableOpacity>
 
-<<<<<<< HEAD
             {/*
             <View style={{  flex: 1, marginTop: 10, alignItems: 'flex-end' }}>
-=======
-            {/* <View style={{ backgroundColor: 'white', flex: 1, alignItems: 'flex-end' }}>
->>>>>>> main
                 <Text style={styles.textUrl} onPress={() => Linking.openURL(article.link)}>
                     <FontAwesome size={30} name={'share-alt'} />
                 </Text>
             </View>
             <View style={{ flex: 1, marginTop: 40 }}>
                 <TouchableOpacity activeOpacity={0.5} style={styles.btnRetour} onPress={() => navigation.goBack()}>Retour</TouchableOpacity>
-<<<<<<< HEAD
             </View>
             */}
-=======
-            </View> */}
->>>>>>> main
 
         </View >
     )
@@ -84,10 +72,6 @@ const styles = StyleSheet.create({
         // maxHeight:'210px',
         minHeight: '180px',
         textAlign: 'center',
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     },
     textTitle: {
         color: 'black',

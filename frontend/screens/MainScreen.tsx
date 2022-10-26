@@ -61,22 +61,8 @@ const styles = StyleSheet.create({
 
   },
   articlieView: {
-<<<<<<< HEAD
-<<<<<<< HEAD
     width: '75%',
     maxWidth: '750px',
     minWidth: '250px'
-
-=======
-=======
->>>>>>> 111ff8f (fix: conflict)
-    // width: '80%',
-    width: '75%',
-    maxWidth: '750px',
-    minWidth: '250px'
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> 111ff8f (fix: conflict)
   }
 });

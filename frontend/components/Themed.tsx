@@ -69,3 +69,4 @@ export function Button(props: ButtonProps) {
   }]} {...otherProps}>
     <Text style={{ color: Colors[selectedTheme].text }}>{text}</Text>
   </Pressable>;
+}

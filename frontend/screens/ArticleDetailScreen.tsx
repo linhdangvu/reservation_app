@@ -26,13 +26,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: "#241f1f",
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> main
-=======
->>>>>>> 111ff8f (fix: conflict)
     },
     title: {
         fontSize: 20,

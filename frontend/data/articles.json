@@ -1,30 +1,4 @@
 [
-<<<<<<< HEAD
-        {
-                "id": 1,
-                "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg",
-                "title": "Tarot",
-                "description": "Tarot reading with Lucia",
-                "details": "Tarot cards are an old tradition of cartomancy, inherited from Chinese, Indian and Egyptian folklore. They were taken over by Italy in the Middle Ages and transmitted throughout the Mediterranean basin. They are an excellent means of communicating with the invisible forces and those of the unconscious.",
-                "link": "https://reactnative.dev/docs/linking"
-        },
-        {
-                "id": 2,
-                "image": "https://images5.alphacoders.com/507/thumb-1920-507388.jpg",
-                "title": "Cristal reading",
-                "description": "Future prediction with Maria",
-                "details": "Only takes a few seconds for our crystal ball to give you accurate information about the upcoming adventures of your life. Love, money, happiness and unhappiness to come, your future will no longer have any secrets for her.",
-                "link": "https://reactnative.dev/docs/linking"
-        },
-        {
-                "id": 3,
-                "image": "https://media.istockphoto.com/photos/palmistry-picture-id1137107858?k=20&m=1137107858&s=612x612&w=0&h=qXHVIXXM8c40o8ojUQxH05ej6n-tcCxAuikhIhE6ckA=",
-                "title": "Hand Reading",
-                "description": "Read your destiny with Yana",
-                "details": "Palmistry is a divinatory practice consisting in interpreting the lines and other signs of the palm of the hand. It is a branch of quackery. Each element studied is linked to an aspect of the personality.",
-                "link": "https://reactnative.dev/docs/linking"
-        }
-=======
     {
         "id": 1,
         "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg",
@@ -49,5 +23,4 @@
         "details": "Palmistry is a divinatory practice consisting in interpreting the lines and other signs of the palm of the hand. It is a branch of quackery. Each element studied is linked to an aspect of the personality.",
         "link": "https://reactnative.dev/docs/linking"
     }
->>>>>>> main
 ]
