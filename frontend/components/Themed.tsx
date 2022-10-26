@@ -62,6 +62,7 @@ export function Button(props: ButtonProps) {
   const { text, lightColor, darkColor, ...otherProps } = props;
   const theme = useColorScheme();
   const selectedTheme = theme == 'light' ? 'dark' : 'light';
+<<<<<<< HEAD
 
   return <Pressable style={[{
     backgroundColor: Colors[selectedTheme].background,
@@ -73,3 +74,13 @@ export function Button(props: ButtonProps) {
 
 
 
+=======
+
+  return <Pressable style={[{
+    backgroundColor: Colors[selectedTheme].background,
+    margin: 10, padding: 10, paddingHorizontal: 20, borderRadius: 10
+  }]} {...otherProps}>
+    <Text style={{ color: Colors[selectedTheme].text }}>{text}</Text>
+  </Pressable>;
+}
+>>>>>>> main

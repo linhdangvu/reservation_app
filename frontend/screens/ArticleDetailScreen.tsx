@@ -26,7 +26,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: "#241f1f",
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     },
     title: {
         fontSize: 20,

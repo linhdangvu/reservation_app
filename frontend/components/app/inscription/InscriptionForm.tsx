@@ -1,7 +1,11 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
+<<<<<<< HEAD
 import { verifEmail, verifPassword, verifUsers } from '../../../helpers/LoginHelpers';
+=======
+import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
+>>>>>>> main
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -40,8 +44,13 @@ export default function InscriptionForm() {
         let errorsForm = [];
         if (errorPassword != "") errorsForm.push(errorPassword);
         if (errorEmail != "") errorsForm.push(errorEmail)
+<<<<<<< HEAD
         if (password !== passwordconfirm) errorsForm.push("Password is the same")
         if (verifUsers(email, password)) errorsForm.push("Email or password exit")
+=======
+        if (password !== passwordconfirm) errorsForm.push("Password not the same")
+        if (email != user.email && password != user.password) errorsForm.push("Email or password not correct")
+>>>>>>> main
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
             login({ password: password, email: email })
@@ -96,7 +105,11 @@ export default function InscriptionForm() {
                     value={passwordconfirm}
                     secureTextEntry={true}
                     onChangeText={setPasswordconfirm}
+<<<<<<< HEAD
                     placeholder="Password" />
+=======
+                    placeholder="Password Confirm" />
+>>>>>>> main
             </View>
 
 

@@ -11,6 +11,7 @@ import data from "../data/articles.json"
 
 
 export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>) {
+
   const { token } = React.useContext(UserContext);
 
   const logout = () => {
@@ -60,9 +61,16 @@ const styles = StyleSheet.create({
 
   },
   articlieView: {
+<<<<<<< HEAD
     width: '75%',
     maxWidth: '750px',
     minWidth: '250px'
 
+=======
+    // width: '80%',
+    width: '75%',
+    maxWidth: '750px',
+    minWidth: '250px'
+>>>>>>> main
   }
 });

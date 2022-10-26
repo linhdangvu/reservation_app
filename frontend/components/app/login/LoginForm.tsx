@@ -1,7 +1,7 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword, verifUsers, setUserInfo } from '../../../helpers/LoginHelpers';
+import { verifEmail, verifPassword, setUserInfo, verifUsers } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -19,6 +19,7 @@ export default function LoginForm() {
         }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
+            console.log(email)
             setUserInfo(email)
             window.location.href = "main"
         } else {
@@ -54,6 +55,7 @@ export default function LoginForm() {
                     value={password}
                     secureTextEntry={true}
                     onChangeText={setPassword}
+
                     placeholder="Password" />
             </View>
             {errors.map((item: String, index) => {
