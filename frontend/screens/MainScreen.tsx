@@ -16,6 +16,7 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
   const logout = () => {
     if (typeof (Storage) !== 'undefined') {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       window.location.href = "main"
     } else {
       alert("No support storage")
@@ -24,7 +25,7 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
   }
 
   return (
-    
+
     <View style={styles.container}>
       <Text style={styles.title}>Accueil</Text>
       <ScrollView style={styles.articlieView} contentContainerStyle={{ flex: 1 }}>

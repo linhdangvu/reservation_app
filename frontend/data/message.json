@@ -1,0 +1,25 @@
+{
+    "message": [
+        {
+            "id": 1,
+            "clientId": 2,
+            "messageFrom": "admin",
+            "text": "ONEEEE",
+            "time": "26/10/2022-09:43:56"
+        },
+        {
+            "id": 2,
+            "clientId": 2,
+            "messageFrom": "client",
+            "text": "TWOOO",
+            "time": "26/10/2022-09:44:56"
+        },
+        {
+            "id": 3,
+            "clientId": 3,
+            "messageFrom": "client",
+            "text": "TWOOO",
+            "time": "26/10/2022-09:44:56"
+        }
+    ]
+}

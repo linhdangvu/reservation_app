@@ -6,14 +6,21 @@ import CalendarPicker from 'react-native-calendar-picker';
 import * as data from '../../../data/calendar.json'
 import moment from 'moment';
 
+import { getUserInfo } from '../../../helpers/LoginHelpers';
+
+
 const Calendar = () => {
+
+    const userId = getUserInfo().user.id
 
     const [selectedStartDate, setSelectedStartDate] = useState(moment);
     const startDate = selectedStartDate
         ? selectedStartDate.format('YYYY-MM-DD').toString()
         : ''
     const dataCalendar = JSON.parse(JSON.stringify(data))
-    const info = dataCalendar.default.filter((item: any) => { return item.date === startDate })
+    const info = dataCalendar.default.filter((item: any) => { return item.date === startDate && item.userId === userId })
+
+
     return (
         <View style={styles.container}>
 
