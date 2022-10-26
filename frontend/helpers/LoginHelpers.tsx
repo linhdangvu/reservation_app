@@ -1,5 +1,5 @@
 
-
+import * as users from '../data/users.json'
 
 export function verifPassword(password: string) {
     if (password == "") {
@@ -7,7 +7,6 @@ export function verifPassword(password: string) {
     }
     return ""
 }
-
 
 export function verifEmail(email: string) {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -18,5 +17,27 @@ export function verifEmail(email: string) {
     //     return "There are no email like this.";
     // }
     return "";
+}
+
+const usersData = JSON.parse(JSON.stringify(users)).default.users
+
+export function verifUsers(email: string, password: string) {
+    return usersData.some((item: any) => {
+        return item.email === email && item.password === password
+    })
+}
+
+export function setUserInfo(email: string) {
+    const user = usersData.filter((item: any) => {
+        return item.email === email
+    })
+    // console.log(JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user))
+}
+
+export function getUserInfo() {
+    const user: any = localStorage.getItem('user')
+    // console.log(JSON.parse(user).pop())
+    return { user: JSON.parse(user).pop() }
 }
 

@@ -1,11 +1,12 @@
 import { Text, View } from '../../Themed';
 import { StyleSheet } from 'react-native';
 import ChatBox from './chatbox/ChatBox';
+import { getUserInfo } from '../../../helpers/LoginHelpers';
 
 
-const ClientMessage = () => {
+const ClientMessage = (props: any) => {
     // for backend & data
-    const clientId = 2
+    const clientId = Number(props.id)
 
     return (
         <View style={styles.container}>
@@ -21,6 +22,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
-        width: '95%'
+        // width: '95%'
     }
 })
