@@ -22,15 +22,28 @@ const ArticleDetails = ({ article }: { article: ArticleProps }) => {
                 <Text style={styles.textDescription}>
                     {article.description}
                 </Text>
+                <Text style={styles.textDetails}>
+                    {article.details}
+                </Text>
+
             </View>
-            <View style={{ backgroundColor: 'white', flex: 1, alignItems: 'flex-end' }}>
+            
+            <Text style={styles.textUrl} onPress={() => Linking.openURL(article.link)}>
+                    <FontAwesome size={30} name={'share-alt'} />
+            </Text>
+            
+            <TouchableOpacity activeOpacity={0.5} style={styles.btnRetour} onPress={() => navigation.goBack()}>Retour</TouchableOpacity>
+
+            {/*
+            <View style={{  flex: 1, marginTop: 10, alignItems: 'flex-end' }}>
                 <Text style={styles.textUrl} onPress={() => Linking.openURL(article.link)}>
                     <FontAwesome size={30} name={'share-alt'} />
                 </Text>
             </View>
-            <View style={{ backgroundColor: 'white', flex: 1 }}>
+            <View style={{ flex: 1, marginTop: 40 }}>
                 <TouchableOpacity activeOpacity={0.5} style={styles.btnRetour} onPress={() => navigation.goBack()}>Retour</TouchableOpacity>
             </View>
+            */}
 
         </View >
     )
@@ -41,44 +54,66 @@ export default ArticleDetails
 const styles = StyleSheet.create({
     container: {
         //   paddingTop: 50,
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         margin: 10,
-        flex: 1
+        flex: 1,
+        width: '75%',
+        maxWidth: '750px',
+        minWidth: '250px',
+        
     },
     text: {
         border: 'solid 1px gray',
-        backgroundColor: 'white',
+        backgroundColor: '#c6cccb',
         marginTop: 20,
-        padding: 10,
-        flex: 1
+        padding: 15,
+        flex: 1,
+        borderRadius: 10,
+        height: '40vw',
+       // maxHeight:'210px',
+        minHeight:'180px',
+        textAlign: 'center',
+
     },
     textTitle: {
         color: 'black',
+        fontSize: 20,
+        fontWeight: '700',
     },
     textDescription: {
         color: 'black',
-
+        fontSize: 16,
+        fontStyle: 'italic',
+    },
+    textDetails: {
+        color: 'gray',
     },
     stretch: {
-        width: 300,
-        height: 150,
+        //width: 'inherit',
+        height: '40vw',
+        maxHeight:'300px',
+        minHeight:'180px',
         resizeMode: 'stretch',
-        border: 'solid 1px black',
+        borderRadius: 10,
     },
     btnRetour: {
-        marginTop: 5,
-        border: 'solid 1px black',
+        borderRadius: 5,
+        border: '1px solid steelblue',
         width: 'fit-content',
-        paddingHorizontal: 10,
-        paddingVertical: 5
+        paddingHorizontal: 20,
+        paddingVertical: 8,
+        marginTop: '-37px',
+        color: '#c6cccb',
     },
     textUrl: {
-        color: 'black',
-        marginTop: 5,
-        border: 'solid 1px black',
+        color: '#c6cccb',
+        border: '1px solid steelblue',
+        borderRadius: 5,
         width: 'fit-content',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
+        paddingHorizontal: 5,
+        paddingVertical: 3,
+        alignSelf: 'flex-end',
+        marginTop: '15px',
 
     }
 });

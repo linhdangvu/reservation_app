@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, Platform, ScrollView, StyleSheet } from 'react-native';
+import { Platform, ScrollView, StyleSheet } from 'react-native';
 import * as React from 'react';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Button, Text, View } from '../components/Themed';
@@ -11,23 +11,11 @@ import data from "../data/articles.json"
 
 
 export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>) {
+
   const { token } = React.useContext(UserContext);
-
-  const logout = () => {
-    if (typeof (Storage) !== 'undefined') {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = "main"
-    } else {
-      alert("No support storage")
-    }
-
-  }
-
   return (
-
     <View style={styles.container}>
-      <Text style={styles.title}>Accueil</Text>
+      {/* <Text style={styles.title}>Accueil</Text> */}
       <ScrollView style={styles.articlieView} contentContainerStyle={{ flex: 1 }}>
         {data.map((item: ArticleProps, index) => {
           return <ArticleItem article={item} key={index} />
@@ -35,9 +23,8 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
       </ScrollView>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       {!token ?
-        <Button onPress={() => { navigation.navigate("Login") }} text="Login" />
-        : <><Button onPress={logout} text="Logout" /><View /></>
-
+        <Button onPress={() => { navigation.navigate("Login"); console.log('This is login') }} text="Login" />
+        : <View />
       }
     </View>
   );
@@ -48,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "whitesmoke"
+    backgroundColor: "#241f1f"
   },
   title: {
     fontSize: 20,
@@ -63,7 +50,9 @@ const styles = StyleSheet.create({
 
   },
   articlieView: {
-    // width: '80%',
+    width: '75%',
+    maxWidth: '750px',
+    minWidth: '250px'
 
   }
 });

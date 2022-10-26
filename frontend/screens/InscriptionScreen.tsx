@@ -9,7 +9,6 @@ import { RootStackScreenProps } from '../types';
 export default function InscriptionScreen({ navigation }: RootStackScreenProps<'Inscription'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Inscription</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <InscriptionForm />
     </View>
@@ -21,14 +20,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: "#241f1f",
+    minHeight: 700
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   separator: {
-    marginVertical: 30,
     height: 1,
     width: '80%',
   },

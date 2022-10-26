@@ -1,8 +1,9 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword, verifUsers, setUserInfo } from '../../../helpers/LoginHelpers';
+import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
+
 
 export default function LoginForm() {
     const navigation = useNavigation()
@@ -12,13 +13,18 @@ export default function LoginForm() {
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
 
+    // login temporaire
+    const user = {
+        email: "test@test.com",
+        password: "1234"
+    }
+
     const login = ({ email, password }: { email: string, password: string }) => {
         if (isSelected) {
             console.log("Need to set cookie")
         }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
-            setUserInfo(email)
             window.location.href = "main"
         } else {
             alert("No support storage")
@@ -31,7 +37,7 @@ export default function LoginForm() {
         let errorsForm = [];
         if (errorPassword != "") errorsForm.push(errorPassword);
         if (errorEmail != "") errorsForm.push(errorEmail)
-        if (!verifUsers(email, password)) errorsForm.push("Email or password not correct")
+        if (email != user.email && password != user.password) errorsForm.push("Email or password not correct")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
             login({ password: password, email: email })
@@ -51,11 +57,12 @@ export default function LoginForm() {
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
                     value={password}
+                    secureTextEntry={true}
                     onChangeText={setPassword}
                     placeholder="Password" />
             </View>
             {errors.map((item: String, index) => {
-                return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 10 }}>{item}</Text>
+                return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 22 }}>{item}</Text>
             })}
             <View style={styles.checkboxContainer}>
                 <CheckBox
@@ -81,16 +88,19 @@ export default function LoginForm() {
 
 const styles = StyleSheet.create({
     containers: {
-        backgroundColor: 'white',
-        border: 'solid 1px black',
-        width: '80%',
+        backgroundColor: '#dcdcdc',
+        borderRadius: 10,
+        padding: 20,
+        width: '75%',
+        maxWidth: '750px',
+        minWidth: '250px'
     },
     inputLine: {
         flexDirection: 'row',
         marginHorizontal: 10,
         // marginVertical: 10,
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
     },
     labelText: {
         marginHorizontal: 20,
@@ -102,16 +112,20 @@ const styles = StyleSheet.create({
     textInput: {
         height: 40,
         margin: 12,
-        borderWidth: 1,
+        border: '1px solid #8d8f8e',
+        borderRadius: 5,
         padding: 10,
-        flex: 1
+        flex: 1,
+        //backgroundColor: "white"
 
     },
     button: {
         backgroundColor: '#0096FF',
+        alignSelf: 'center',
+        borderRadius: 5,
         padding: 10,
         margin: 20,
-        width: 'fit-content'
+        width: 200
     },
     buttonText: {
         color: 'white',
@@ -120,11 +134,13 @@ const styles = StyleSheet.create({
     checkboxContainer: {
         flexDirection: "row",
         marginHorizontal: 20,
-        backgroundColor: 'white',
-        marginTop: 10
+        backgroundColor: 'inherit',
+        marginTop: 10,
+        paddingLeft: 1
     },
     checkbox: {
         alignSelf: "center",
+        backgroundColor: "inherit",
 
     },
     labelCheckBox: {
@@ -132,16 +148,20 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     footerLogin: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         borderTopWidth: 1,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        paddingTop: 20
     },
     textFooter: {
         color: 'black',
+        fontSize: 11,
         paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingVertical: 5
     },
     sousTextFooter: {
-        color: 'black',
+        color: 'steelblue',
         marginLeft: 5
     }
 });

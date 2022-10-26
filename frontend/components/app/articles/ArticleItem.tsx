@@ -7,6 +7,7 @@ export type ArticleProps = {
     image: string;
     title: string;
     description: string;
+    details: string;
     link: string
 };
 
@@ -27,8 +28,11 @@ const ArticleItem = ({ article }: { article: ArticleProps }) => {
             <Image
                 style={styles.stretch}
                 source={{ uri: article.image }} />
-            <Text style={styles.textDescription}>
+            <Text style={styles.textTitle}>
                 {article.title}
+            </Text>
+            <Text style={styles.textDescription}>
+                {article.description}
             </Text>
         </TouchableOpacity>
     )
@@ -39,18 +43,39 @@ export default ArticleItem
 const styles = StyleSheet.create({
     container: {
         //   paddingTop: 50,
-        backgroundColor: 'white',
+        backgroundColor: '#c6cccb',
         margin: 10,
-        border: 'solid 1px gray'
+        border: 'none',
+        borderRadius: 10,
 
     },
-    textDescription: {
+    textTitle: {
         color: 'black',
-        padding: 10
+        padding: 10,
+        textAlign: 'center',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+        /*
+        height: '20vw',
+        maxHeight:'150px',
+        minHeight:'60px',
+        */
+    },
+    textDescription: {
+        color: 'grey',
+        padding: 10,
+        marginBottom: 10,
+        textAlign: 'center',
+        fontSize: '18px'
     },
     stretch: {
-        width: 300,
-        height: 150,
+        width: 'inherit',
+        height: '40vw',
+        maxHeight:'300px',
+        minHeight:'180px',
         resizeMode: 'stretch',
+        borderTopStartRadius : 10,
+        borderTopEndRadius: 10
     },
 });

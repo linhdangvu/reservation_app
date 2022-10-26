@@ -1,7 +1,7 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword,verifPasswordconfirm } from '../../../helpers/SignUpHelpers';
+import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,7 +12,6 @@ export default function InscriptionForm() {
     const [firstname, setFirstName] = useState("")
     const [lastname, setLastName] = useState("")
     const [password, setPassword] = useState("")
-    const [passwordconfirm, setPasswordconfirm] = useState("")
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
 
@@ -53,7 +52,8 @@ export default function InscriptionForm() {
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
                     value={firstname}
-                    onChangeText={setFirstName} />
+                    onChangeText={setFirstName} 
+                    placeholder="First Name"/>
             </View>
 
 
@@ -61,7 +61,8 @@ export default function InscriptionForm() {
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
                     value={lastname}
-                    onChangeText={setLastName} />
+                    onChangeText={setLastName} 
+                    placeholder="Last Name"/>
             </View>
 
 
@@ -80,6 +81,7 @@ export default function InscriptionForm() {
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
                     value={password}
+                    secureTextEntry={true}
                     onChangeText={setPassword}
                     placeholder="Password" />
             </View>
@@ -89,9 +91,10 @@ export default function InscriptionForm() {
             <Text style={styles.labelText}>Confirm password:</Text>
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
-                    value={passwordconfirm}
-                    onChangeText={setPasswordconfirm}
-                    placeholder="Password confirmation" />
+                    value={password}
+                    secureTextEntry={true}
+                    onChangeText={setPassword}
+                    placeholder="Password" />
             </View>
 
 
@@ -102,26 +105,29 @@ export default function InscriptionForm() {
 
             <TouchableHighlight style={styles.button}
                 onPress={verifLogin}>
-                <Text style={styles.buttonText}>Sign in</Text>
+                <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableHighlight>
-            <View style={styles.footerLogin}>
-            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     containers: {
-        backgroundColor: 'white',
-        border: 'solid 1px black',
-        width: '80%',
+        backgroundColor: '#dcdcdc',
+        marginTop: 10,
+        borderRadius: 10,
+        border: '1px solid #0096FF',
+        padding: 20,
+        width: '75%',
+        maxWidth: '750px',
+        minWidth: '250px'
     },
     inputLine: {
         flexDirection: 'row',
         marginHorizontal: 10,
         // marginVertical: 10,
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
     },
     labelText: {
         marginHorizontal: 20,
@@ -133,16 +139,19 @@ const styles = StyleSheet.create({
     textInput: {
         height: 40,
         margin: 12,
-        borderWidth: 1,
+        border: '1px solid #8d8f8e',
+        borderRadius: 5,
         padding: 10,
         flex: 1
 
     },
     button: {
         backgroundColor: '#0096FF',
+        alignSelf: 'center',
+        borderRadius: 5,
         padding: 10,
         margin: 20,
-        width: 'fit-content'
+        width: 200
     },
     buttonText: {
         color: 'white',
@@ -163,7 +172,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     footerLogin: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         borderTopWidth: 1,
     },
     textFooter: {
