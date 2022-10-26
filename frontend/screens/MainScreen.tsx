@@ -25,8 +25,13 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
 
   return (
     <View style={styles.container}>
+<<<<<<< Updated upstream
       <Text style={styles.title}>Accueil</Text>
       <ScrollView style={styles.articlieView} contentContainerStyle={{ flex: 1 }}>
+=======
+      {/* <Text style={styles.title}>Accueil</Text> */}
+      <ScrollView style={styles.articlieView} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flex: 1 }}>
+>>>>>>> Stashed changes
         {data.map((item: ArticleProps, index) => {
           return <ArticleItem article={item} key={index} />
         })}

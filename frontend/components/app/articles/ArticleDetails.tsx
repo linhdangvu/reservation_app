@@ -49,15 +49,36 @@ const styles = StyleSheet.create({
         border: 'solid 1px gray',
         backgroundColor: 'white',
         marginTop: 20,
+<<<<<<< Updated upstream
         padding: 10,
         flex: 1
+=======
+        padding: 15,
+        flex: 1,
+        borderRadius: 10,
+        height: '25vw',
+       // maxHeight:'210px',
+        minHeight:'80px',
+        textAlign: 'center',
+
+>>>>>>> Stashed changes
     },
     textTitle: {
         color: 'black',
     },
     textDescription: {
         color: 'black',
+<<<<<<< Updated upstream
 
+=======
+        fontSize: 16,
+        fontStyle: 'italic',
+        paddingTop: 20
+    },
+    textDetails: {
+        color: 'gray',
+        paddingVertical: 20
+>>>>>>> Stashed changes
     },
     stretch: {
         width: 300,

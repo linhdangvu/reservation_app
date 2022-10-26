@@ -2,7 +2,7 @@
 
 
 export function verifPassword(password: string) {
-    if (password == "") {
+    if (password == "" || password.length < 8) {
         return "Please write password"
     }
     return ""

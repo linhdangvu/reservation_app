@@ -25,6 +25,7 @@ export default function LoginForm() {
         }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
+            localStorage.setItem("user",email)
             window.location.href = "main"
         } else {
             alert("No support storage")
