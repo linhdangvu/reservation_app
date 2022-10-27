@@ -23,7 +23,7 @@ const AdminMessage = () => {
                     return <TouchableOpacity activeOpacity={0.5} style={styles.chatList} onPress={() => navigation.navigate('ChatBox', { clientId: item.id, role: "admin" })} key={index}>
                         <Image style={styles.avatar} source={{ uri: item.image }} />
                         <View style={styles.nameClient}>
-                            <Text style={{ color: 'black' }}>{item.firstname} {item.lastname}</Text>
+                            <Text style={{ color: 'black', fontWeight: '600' }}>{item.firstname} {item.lastname}</Text>
                         </View>
 
                     </TouchableOpacity>
@@ -40,8 +40,10 @@ export default AdminMessage
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         justifyContent: 'center',
+        width: '90%',
+        minWidth: '250px'
 
     },
     chatList: {
@@ -49,8 +51,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginTop: 10,
         flex: 1,
-        backgroundColor: 'white',
-        flexDirection: 'row'
+        backgroundColor: '#81807f',
+        flexDirection: 'row',
+        borderRadius: 10
     },
     avatar: {
         width: 50,
@@ -58,8 +61,10 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     nameClient: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         flex: 1,
-        justifyContent: 'center', alignItems: 'center'
+        justifyContent: 'center', 
+        alignItems: 'flex-start',
+        paddingLeft: 10
     }
 })

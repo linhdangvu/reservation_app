@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     paddingTop: 8
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 15,
     height: 1,
     width: '80%',
 

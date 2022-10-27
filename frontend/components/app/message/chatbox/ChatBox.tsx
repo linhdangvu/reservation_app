@@ -1,5 +1,5 @@
 import { Text, View } from '../../../Themed';
-import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import ChatLeft from './ChatLeft';
 import ChatRight from './ChatRight';
 import { useRoute } from '@react-navigation/native';
@@ -60,18 +60,23 @@ const ChatBox = (props: any) => {
     return (
         <View style={styles.container}>
             <View style={styles.chatView}>
-                {(role === 'admin') ? <View>
-                    {messageList.map((item: any, index: number) => <View key={index} >
-                        {(item.messageFrom === 'client') ? <ChatLeft text={item.text} time={item.time} /> : <ChatRight text={item.text} time={item.time} />
-                        }
-                    </View>)}
-                </View> : <View>
-                    {messageList.map((item: any, index: number) => <View key={index} >
-                        {(item.messageFrom === 'client') ? <ChatRight text={item.text} time={item.time} /> : <ChatLeft text={item.text} time={item.time} />
-                        }
-                    </View>)}
+                <View style={styles.header}>
+                    Name 
                 </View>
-                }
+                <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{ flex: 1 }}>
+                    {(role === 'admin') ? <View>
+                        {messageList.map((item: any, index: number) => <View key={index} >
+                            {(item.messageFrom === 'client') ? <ChatLeft text={item.text} time={item.time} /> : <ChatRight text={item.text} time={item.time} />
+                            }
+                        </View>)}
+                    </View> : <View>
+                        {messageList.map((item: any, index: number) => <View key={index} >
+                            {(item.messageFrom === 'client') ? <ChatRight text={item.text} time={item.time} /> : <ChatLeft text={item.text} time={item.time} />
+                            }
+                        </View>)}
+                    </View>
+                    }
+                </ScrollView>
 
             </View>
 
@@ -83,7 +88,7 @@ const ChatBox = (props: any) => {
                     placeholder="Message..."
                 />
                 <TouchableOpacity onPress={sendMessage} style={styles.btnSend}>
-                    <Text style={{ color: 'black' }}>Send</Text>
+                    <Text style={{ color: 'white' }}>Send</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -94,41 +99,56 @@ export default ChatBox
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         flex: 1,
         width: '95%'
     },
     inputView: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         flexDirection: 'row',
         flex: 1,
         justifyContent: 'center',
         margin: 10,
         alignItems: 'center',
+        paddingHorizontal: 10
 
     },
     input: {
         flex: 9,
-        // justifyContent: 'center',
+        // justifyContent: 'center',*
+        height: 45,
         borderWidth: 1,
+        borderRadius: 15,
         paddingHorizontal: 10,
-        paddingVertical: 5
+        paddingVertical: 5,
+        backgroundColor: "white"
     },
     btnSend: {
         flex: 2,
         // justifyContent: 'center',
+        height: 45,
         marginLeft: 8,
         borderWidth: 1,
-        backgroundColor: 'antiquewhite',
+        backgroundColor: '#0096FF',
+        borderRadius: 5,
         paddingHorizontal: 10,
-        paddingVertical: 5,
+        paddingVertical: 10,
         textAlign: 'center'
     },
     chatView: {
         backgroundColor: 'white',
         flex: 10,
-        margin: 10,
+        margin: 20,
         borderWidth: 1,
+        borderRadius: 10,
+        padding: 20
         // width: '100%'
+    },
+    header: {
+        textAlign: 'center',
+        paddingVertical: '15px',
+        backgroundColor: 'inherit',
+        borderBottomWidth: 1,
+        marginBottom: 10,
     }
 })
