@@ -7,18 +7,24 @@ import * as data from '../../../data/calendar.json'
 import moment from 'moment';
 
 import { getUserInfo } from '../../../helpers/LoginHelpers';
+import { getCalendar } from '../../../helpers/ReservationHelpers';
 
 
 const Calendar = () => {
 
     const userId = getUserInfo().user.id
+    const role = getUserInfo().user.role
+    const arrCalendar = getCalendar()
 
     const [selectedStartDate, setSelectedStartDate] = useState(moment);
     const startDate = selectedStartDate
         ? selectedStartDate.format('YYYY-MM-DD').toString()
         : ''
-    const dataCalendar = JSON.parse(JSON.stringify(data))
-    const info = dataCalendar.default.filter((item: any) => { return item.date === startDate && item.userId === userId })
+    const dataCalendar = [...JSON.parse(JSON.stringify(data)).default, ...arrCalendar]
+    console.log(dataCalendar)
+    const info = dataCalendar.filter((item: any) => {
+        return (role === 'admin' ? item.date === startDate : item.date === startDate && item.userId === userId)
+    })
 
 
     return (
@@ -30,7 +36,13 @@ const Calendar = () => {
                     <View style={styles.dayInfo} key={index}>
                         {/* <Text style={{ color: 'black' }}>{startDate}</Text> */}
                         <Text style={styles.textInfo}>{item.title}</Text>
-                        <Text style={styles.textInfo}>{item.description}</Text>
+                        {
+                            item.description.map((item2: string, index: number) =>
+
+                                <Text style={styles.textInfo} key={index + 1}>{index + 1}. {item2.text}</Text>
+
+                            )
+                        }
                     </View>
                 )
             })}

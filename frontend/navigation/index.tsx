@@ -108,8 +108,8 @@ function BottomTabNavigator() {
         name="Panier"
         component={PanierScreen}
         options={{
-          title: 'Panier',
-          tabBarIcon: ({ color }) => <TabBarIcon name="shopping-basket" color={color} />,
+          title: 'Reservation',
+          tabBarIcon: ({ color }) => <TabBarIcon name="ticket" color={color} />,
         }}
       />
       <BottomTab.Screen
