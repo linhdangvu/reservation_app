@@ -13,13 +13,13 @@ const checkDate = (date: string) => {
     const day = Number(date.slice(0, 2))
     const month = Number(date.slice(3, 5))
     const year = Number(date.slice(6, 10))
-    const hour = Number(date.slice(11, 13))
-    const minute = Number(date.slice(14, 16))
-    const second = Number(date.slice(17, 19))
-    console.log(day, month, year, hour, minute, second)
-    if (hour > 24 || minute > 59 || second > 59 || hour < 0 || minute < 0 || second < 0) {
-        return false
-    }
+    // const hour = Number(date.slice(11, 13))
+    // const minute = Number(date.slice(14, 16))
+    // const second = 1 // not use 
+    // console.log(day, month, year, hour, minute, second)
+    // if (hour > 24 || minute > 59 || second > 59 || hour < 0 || minute < 0 || second < 0) {
+    //     return false
+    // }
     if (month > 12 || day > 31) {
         return false
     }
@@ -54,7 +54,7 @@ const verifDate = (date: string) => {
 
         }
     } else {
-        return "Need format dd/mm/yyyy-hh:mm:ss"
+        return "Need format dd/mm/yyyy-hh:mm"
 
     }
 }

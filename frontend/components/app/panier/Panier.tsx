@@ -10,37 +10,54 @@ import { useNavigation } from '@react-navigation/native';
 
 export type TodoList = {
     id: number,
-    text: string
+    text: string,
+    time: string,
+    date: string
 };
 
 const Panier = () => {
-    const [selectedValue, setSelectedValue] = useState("One");
+    const [selectedValue, setSelectedValue] = useState("Tarot reading with Lucia");
+    const [selectedTime, setSelectedTime] = useState("10:00");
+    // const [selectedDuration, setSelectedDuration] = useState("Morning");
+
 
     const options = [
         {
             id: 1,
-            label: "One",
-            value: "one"
+            label: "Tarot reading with Lucia",
+            value: "Lucia"
         },
         {
             id: 2,
-            label: "Two",
-            value: "two"
+            label: "Read your destiny with Yana",
+            value: "Yana"
         },
         {
             id: 3,
-            label: "Three",
-            value: "three"
+            label: "Future prediction with Maria",
+            value: "Maria"
         }
     ]
+
+    const optionsTime = [
+        "10:00", "11:00", "12:00", "14:00", "15:00", "16:00"
+    ]
     const navigation = useNavigation()
-    const [date, setDate] = useState(moment().format("DD/MM/YYYY-HH:mm:ss").toString())
+    const [date, setDate] = useState(moment().format("DD/MM/YYYY").toString())
     const [errors, setErrors] = useState("")
 
     const [todoList, setTodoList] = useState(Array<TodoList>)
 
     const addTodo = (item: any) => {
-        setTodoList([...todoList, item])
+        const checkTime = todoList.some((it) =>
+            it.time === item.time
+        )
+        if (!checkTime) {
+            setTodoList([...todoList, item])
+        } else {
+            alert("Already existe")
+        }
+
     }
 
     const deleteTodo = (todoId: number) => {
@@ -64,9 +81,7 @@ const Panier = () => {
             if (notif === "true") {
                 alert("Notification: Add to calendar")
             }
-            navigation.navigate('Calendar', {
-                date: data.date
-            })
+            navigation.navigate('Calendar')
         }
     }
 
@@ -76,7 +91,7 @@ const Panier = () => {
             <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
                 <Picker
                     selectedValue={selectedValue}
-                    style={{ height: 50, width: 150, }}
+                    style={{ height: 50, width: '95%', }}
                     onValueChange={(itemValue: any, itemIndex: any) => setSelectedValue(itemValue)}
                 >
                     {options.map((item: any, index: number) =>
@@ -85,7 +100,21 @@ const Panier = () => {
 
                 </Picker>
                 {space}
-                <Text style={styles.btnAdd} onPress={() => addTodo({ id: todoList.length + 1, text: selectedValue })}>
+
+            </View>
+            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
+                <Picker
+                    selectedValue={selectedTime}
+                    style={{ height: 50, width: 150, }}
+                    onValueChange={(itemValue: any, itemIndex: any) => setSelectedTime(itemValue)}
+                >
+                    {optionsTime.map((item: any, index: number) =>
+                        <Picker.Item label={item} value={item} key={index} />
+                    )}
+
+                </Picker>
+                {space}
+                <Text style={styles.btnAdd} onPress={() => addTodo({ id: todoList.length + 1, text: selectedValue, time: selectedTime, date: date })}>
                     <FontAwesome size={30} name={'plus'} />
                 </Text>
             </View>
@@ -95,7 +124,7 @@ const Panier = () => {
                     <ScrollView>
                         {todoList.map((item: any, index: number) =>
                             <View style={{ flexDirection: 'row', backgroundColor: 'white', marginBottom: 10 }} key={index}>
-                                <Text style={styles.seletedOption}>{item.text}</Text>
+                                <Text style={styles.seletedOption}>{item.text} - {item.time} - {item.date}</Text>
                                 {space}
                                 <Text style={styles.btnDelete} onPress={() => deleteTodo(item.id)}>
                                     <FontAwesome size={30} name={'trash'} />
@@ -170,12 +199,12 @@ const styles = StyleSheet.create({
         padding: 5,
         textAlign: 'center',
         borderWidth: 1,
-        marginTop: 10
+        marginTop: 5
     },
     btnValider: {
         borderWidth: 1,
         color: 'black',
         padding: 5,
-        margin: 10
+        margin: 2
     }
 })
