@@ -103,7 +103,7 @@ export default function Profile() {
     return (
         <View style={styles.containers}>
             <View style={{flexDirection: 'row', backgroundColor: 'inherit'}}>
-                <View style={{flex: 2}}>
+                <View style={{flex: 2, padding: 10, backgroundColor: 'inherit'}}>
                     <Image
                         style = {styles.img}
                         source={{ uri: Users.image }}
@@ -149,7 +149,7 @@ export default function Profile() {
                     <Text style={styles.buttonText}>Update</Text>
                 </TouchableHighlight>
             </View>
-            <View>
+            <View style={{backgroundColor: 'inherit', alignSelf: 'center', flexDirection: 'row'}}>
                 <Switch
                     trackColor={{ false: "#767577", true: "#81b0ff" }}
                     thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -157,6 +157,7 @@ export default function Profile() {
                     onValueChange={toggleSwitch}
                     value={isEnabled}
                 />
+                <Text style={styles.notifText}>Active Notifications</Text>
             </View>
         </View>
     )
@@ -164,43 +165,48 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
     containers: {
-        backgroundColor: 'inherit', //'#dcdcdc',
+        backgroundColor: '#ededec', //'#dcdcdc',
         borderRadius: 10,
-        border: '1px solid #0096FF',
+        marginTop: 20,
+        //border: '1px solid #0096FF',
         padding: 20,
         width: '75%',
         maxWidth: '750px',
         minWidth: '250px'
     },
     textInput: {
-        //height: 30,
-        margin: 12,
+        maxHeight: 35,
+        marginHorizontal: 12,
+        marginVertical: 5,
         border: '1px solid #8d8f8e',
         borderRadius: 5,
         padding: 10,
         flex: 1,
         backgroundColor: "inherit",
         
-
     },
     button: {
         backgroundColor: '#0096FF',
         alignSelf: 'flex-end',
         borderRadius: 5,
-        padding: 10,
+        paddingVertical: 5,
+        paddingHorizontal: 20,
         margin: 10,
-        width: 100
     },
     buttonText: {
         color: 'white',
         textAlign: 'center'
     },
     img: {
-        height: '40vw',
-        maxHeight:'300px',
-        minHeight:'180px',
+        height: '100%',
+        minHeight:'100',
         resizeMode: 'stretch',
-        borderTopStartRadius : 10,
-        borderTopEndRadius: 10
+        borderRadius : 10,
+    },
+    notifText: {
+        fontSize: 18,
+        color: 'black',
+        padding: 10,
+        marginTop: '-15px',
     }
 });

@@ -9,7 +9,7 @@ const ChatRight = (props) => {
         <View style={styles.container}>
             <View style={styles.rightText}>
                 <Text style={{ color: 'black' }}>{props.text}</Text>
-                <Text style={{ color: 'black' }}>{props.time}</Text>
+                <Text style={{ color: '#4d7dc6', fontSize: 10, textAlign: 'right', marginTop: 5  }}>{props.time}</Text>
             </View>
             {spacer}
         </View>
@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
 
     },
     rightText: {
-        backgroundColor: 'white',
-        width: '70%',
-        borderWidth: 1,
+        backgroundColor: '#94bbf5',
+        width: '50%',
+        borderRadius: 10,
         padding: 10,
         margin: 5
     }
