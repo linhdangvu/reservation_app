@@ -2,9 +2,11 @@ import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, Image, Switch } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
-import { verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
+import { setUser, verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
-import data from "../../../data/users.json"
+// import data from "../../../data/users.json"
+import { getUserInfo } from '../../../helpers/LoginHelpers';
+import { verifFirstname, verifPasswordconfirm, verifPhone } from '../../../helpers/SignUpHelpers';
 
 export type UserProps = {
     id: number;
@@ -21,27 +23,19 @@ export default function Profile() {
     const navigation = useNavigation()
 
     let Users = {
-        id: 0,
-        image: "",
-        lastname: "",
-        firstname: "",
-        email: "",
-        phone: "",
-        password: "",
-        role: ""
+        id: getUserInfo().user.id,
+        image: getUserInfo().user.image,
+        lastname: getUserInfo().user.lastname,
+        firstname: getUserInfo().user.firstname,
+        email: getUserInfo().user.email,
+        phone: getUserInfo().user.phone,
+        password: getUserInfo().user.password,
+        role: getUserInfo().user.role
     }
-    let Index = 0
+    // let Index = 0
 
-    data.users.map((item: UserProps, index)=> {
-        if (item.email == localStorage.getItem("email") ){
-            Users = item
-            Index = index
-        }
-    })
 
-    
-
-    const [image, setImage]       = useState(Users.image)
+    const [image, setImage] = useState(Users.image)
     const [lastname, setLastname] = useState(Users.lastname)
     const [firstname, setFirstname] = useState(Users.firstname)
     const [email, setEmail] = useState(Users.email)
@@ -52,37 +46,74 @@ export default function Profile() {
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const toggleSwitch = () => {
+        setIsEnabled(previousState => !previousState);
+        localStorage.setItem('notification', (!isEnabled).toString())
+
+    };
+
+    console.log('data', isEnabled)
+
+    // const Profile = ({ user }: { user: UserProps }) => {
+    //     data.users.splice(Index, 1, user)
+
+    // }
 
 
-
-    const Profile = ({ user }: { user: UserProps }) => {
-        data.users.splice(Index, 1, user)
-
-    }
-
-    
     const verifProfile = () => {
         let errorEmail = verifEmail(email);
+        let errorPhone = verifPhone(phone);
+        let errorFirstname = verifFirstname(firstname);
+        let errorLastname = verifFirstname(lastname);
         let errorsForm = [];
-        let user = {
-            id: 0,
-            image: image,
-            lastname: lastname,
-            firstname: firstname,
-            email: email,
-            phone: phone,
-            password: Users.password,
-            role: Users.role
-        }
-        if (errorEmail != "") errorsForm.push(errorEmail)
+        // manque verifphone
+        if (errorEmail !== "") errorsForm.push(errorEmail)
+        if (errorPhone !== "") errorsForm.push(errorPhone)
+        if (errorFirstname !== "") errorsForm.push(errorFirstname)
+        if (errorLastname !== "") errorsForm.push(errorLastname)
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            Profile({ user: user })
+            let user: any = {
+                id: 0,
+                image: image,
+                lastname: lastname,
+                firstname: firstname,
+                email: email,
+                phone: phone,
+                password: Users.password,
+                role: Users.role
+            }
+            setUser(user)
+
+
+        }
+    }
+    const updatePassword = () => {
+        let errorPassword = verifPassword(password);
+        let errorConfirmation = verifPasswordconfirm(password, confirmation);
+        let errorsForm = [];
+        // manque verifphone
+        if (errorPassword !== "") errorsForm.push(errorPassword)
+
+        if (errorConfirmation !== "") errorsForm.push(errorConfirmation)
+        setErrors(errorsForm)
+        if (errorsForm.length == 0) {
+            let user: any = {
+                id: 0,
+                image: image,
+                lastname: lastname,
+                firstname: firstname,
+                email: email,
+                phone: phone,
+                password: Users.password,
+                role: Users.role
+            }
+            setUser(user)
+
+
         }
     }
 
-    
     {/*
             const verifLogin = () => {
         let errorPassword = verifPassword(password),
@@ -102,14 +133,14 @@ export default function Profile() {
 
     return (
         <View style={styles.containers}>
-            <View style={{flexDirection: 'row', backgroundColor: 'inherit'}}>
-                <View style={{flex: 2}}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit' }}>
+                <View style={{ flex: 2 }}>
                     <Image
-                        style = {styles.img}
+                        style={styles.img}
                         source={{ uri: Users.image }}
                     />
                 </View>
-                <View style={{flex: 3, backgroundColor: 'inherit'}}>
+                <View style={{ flex: 3, backgroundColor: 'inherit' }}>
                     <TextInput style={styles.textInput}
                         value={lastname}
                         onChangeText={setLastname}
@@ -126,14 +157,14 @@ export default function Profile() {
                         value={phone}
                         onChangeText={setPhone}
                         placeholder="Phone" />
-                    
+
                 </View>
             </View>
             <TouchableHighlight style={styles.button}
                 onPress={verifProfile}>
-                <Text style={styles.buttonText}>Update</Text>
+                <Text style={styles.buttonText}>Update profile</Text>
             </TouchableHighlight>
-            <View style={{backgroundColor: 'inherit'}}>
+            <View style={{ backgroundColor: 'inherit' }}>
                 <TextInput style={styles.textInput}
                     value={password}
                     secureTextEntry={true}
@@ -145,8 +176,8 @@ export default function Profile() {
                     onChangeText={setConfirmation}
                     placeholder="Confirmation" />
                 <TouchableHighlight style={styles.button}
-                    onPress={verifProfile}>
-                    <Text style={styles.buttonText}>Update</Text>
+                    onPress={updatePassword}>
+                    <Text style={styles.buttonText}>Update password</Text>
                 </TouchableHighlight>
             </View>
             <View>
@@ -158,6 +189,9 @@ export default function Profile() {
                     value={isEnabled}
                 />
             </View>
+            {errors.map((item: String, index) => {
+                return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 22 }}>{item}</Text>
+            })}
         </View>
     )
 }
@@ -180,7 +214,7 @@ const styles = StyleSheet.create({
         padding: 10,
         flex: 1,
         backgroundColor: "inherit",
-        
+
 
     },
     button: {
@@ -197,10 +231,10 @@ const styles = StyleSheet.create({
     },
     img: {
         height: '40vw',
-        maxHeight:'300px',
-        minHeight:'180px',
+        maxHeight: '300px',
+        minHeight: '180px',
         resizeMode: 'stretch',
-        borderTopStartRadius : 10,
+        borderTopStartRadius: 10,
         borderTopEndRadius: 10
     }
 });

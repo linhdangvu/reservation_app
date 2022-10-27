@@ -35,6 +35,18 @@ export function setUserInfo(email: string) {
     localStorage.setItem('user', JSON.stringify(user))
 }
 
+export function setUser(data: string) {
+    // const user = usersData.filter((item: any) => {
+    //     return item.email === email
+    // })
+    // console.log(JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify([data]))
+    const notif = localStorage.getItem('notification')
+    if (notif === "true") {
+        alert("Notification: Save user succesfull")
+    }
+}
+
 export function getUserInfo() {
     const user: any = localStorage.getItem('user')
     // console.log(JSON.parse(user).pop())

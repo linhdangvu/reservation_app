@@ -19,8 +19,8 @@ export default function LoginForm() {
         }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
-            localStorage.setItem("email",email)
-            console.log(email)
+            localStorage.setItem("email", email)
+            localStorage.setItem("notification", "true")
             setUserInfo(email)
             window.location.href = "main"
         } else {

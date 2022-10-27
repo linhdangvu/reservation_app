@@ -8,10 +8,11 @@ import moment from 'moment';
 
 import { getUserInfo } from '../../../helpers/LoginHelpers';
 import { getCalendar } from '../../../helpers/ReservationHelpers';
+import { useRoute } from '@react-navigation/native';
 
 
 const Calendar = () => {
-
+    const route = useRoute()
     const userId = getUserInfo().user.id
     const role = getUserInfo().user.role
     const arrCalendar = getCalendar()

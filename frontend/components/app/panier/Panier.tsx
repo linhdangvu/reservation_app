@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import moment from 'moment';
 import { setCalendar, verifDate } from '../../../helpers/ReservationHelpers';
+import { useNavigation } from '@react-navigation/native';
 
 export type TodoList = {
     id: number,
@@ -32,7 +33,7 @@ const Panier = () => {
             value: "three"
         }
     ]
-
+    const navigation = useNavigation()
     const [date, setDate] = useState(moment().format("DD/MM/YYYY-HH:mm:ss").toString())
     const [errors, setErrors] = useState("")
 
@@ -59,6 +60,13 @@ const Panier = () => {
             }
             setCalendar(data)
             // console.log(data)
+            const notif = localStorage.getItem('notification')
+            if (notif === "true") {
+                alert("Notification: Add to calendar")
+            }
+            navigation.navigate('Calendar', {
+                date: data.date
+            })
         }
     }
 
