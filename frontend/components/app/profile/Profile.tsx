@@ -57,6 +57,7 @@ export default function Profile() {
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState);
         localStorage.setItem('notification', (!isEnabled).toString())
+        if (!isEnabled) alert("Notification active")
 
     };
 

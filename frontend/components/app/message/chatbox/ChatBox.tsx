@@ -7,6 +7,7 @@ import { useState } from 'react';
 import * as message from '../../../../data/message.json'
 import moment from 'moment';
 import { getMessageList, setMessage } from '../../../../helpers/MessageHelpers';
+import { getUsersList } from '../../../../helpers/UsersHelpers';
 
 
 const ChatBox = (props: any) => {
@@ -22,7 +23,7 @@ const ChatBox = (props: any) => {
         clientId = route.params?.clientId
         role = route.params?.role
     }
-
+    const userList = getUsersList()
     console.log(role)
     const dataMessage = getMessageList()
     const filteredMessage = dataMessage.filter((item: any) => {
@@ -57,14 +58,21 @@ const ChatBox = (props: any) => {
         onChangeText("")
     }
 
-
+    const getClientName = (id: string) => {
+        const client = userList.filter((item: any) => item.id === Number(id))
+        // console.log(client)
+        return client[0].firstname + " " + client[0].lastname
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.chatView}>
-                <View style={styles.header}>
-                    Name
-                </View>
+                {(role === 'admin') ? <View style={styles.header}>
+                    {getClientName(clientId)}
+                </View> : <View style={styles.header}>
+                    Service client
+                </View>}
+
                 <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{ flex: 1 }}>
                     {(role === 'admin') ? <View>
                         {messageList.map((item: any, index: number) => <View key={index} >
