@@ -17,7 +17,7 @@ yarn start
 ```
 
 ## Admin 
-email: admin@cfa.com
+email: admin@cfa.com <br>
 password: cfa
 
 ### Cours
