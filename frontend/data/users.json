@@ -4,9 +4,9 @@
             "id": 1,
             "lastname": "Admin",
             "firstname": "Admin",
-            "email": "test@test.com",
+            "email": "admin@cfa.com",
             "phone": "0612345678",
-            "password": "1234",
+            "password": "cfa",
             "role": "admin",
             "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
         }

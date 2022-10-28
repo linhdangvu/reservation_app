@@ -12,7 +12,7 @@ export default function LoginForm() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState(Array<String>())
-    const [isSelected, setSelection] = useState(false);
+    const [isSelected, setSelection] = useState(true);
     const usersData = getUsersList()
     const login = ({ email, password }: { email: string, password: string }) => {
         if (isSelected) {

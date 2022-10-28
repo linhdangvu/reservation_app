@@ -137,13 +137,13 @@ const Panier = () => {
     return (
         <View style={styles.container}>
 
-            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', width: "100%"}}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', width: "100%" }}>
                 {role === 'admin' ? <View style={{ flexDirection: 'column', backgroundColor: 'inherit', flex: 6 }}>
                     <TextInput
                         style={styles.headerInput}
                         onChangeText={setClientName}
                         value={client}
-                        placeholder= {'Client Name'}
+                        placeholder={'Client Name'}
                     />
                 </View> : <></>}
                 <Picker
@@ -160,7 +160,7 @@ const Panier = () => {
             </View>
 
 
-            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', width: '100%'}}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', width: '100%' }}>
                 <Picker
                     selectedValue={selectedValue}
                     style={styles.headerInput}
@@ -171,17 +171,18 @@ const Panier = () => {
                     )}
 
                 </Picker>
-                <Text style={styles.btnAdd} onPress={() => addTodo({ id: todoList.length + 1, text: selectedValue, time: selectedTime, date: date, who: (options.find((item) => item.label === selectedValue)?.value) })}>
-                    <FontAwesome size={20} name={'plus'} />
-                </Text>
+
             </View>
+            <Text style={styles.btnAdd} onPress={() => addTodo({ id: todoList.length + 1, text: selectedValue, time: selectedTime, date: date, who: (options.find((item) => item.label === selectedValue)?.value) })}>
+                <FontAwesome size={20} name={'plus'} />
+            </Text>
             {/* List add */}
             <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 7, width: '100%' }}>
                 {errors.map((item: String, index) => {
                     return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 10 }}>{item}</Text>
                 })}
                 {todoList.length !== 0 ?
-                    <ScrollView showsVerticalScrollIndicator = {false}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         {todoList.map((item: any, index: number) =>
                             <View style={styles.reservation} key={index}>
                                 <Text style={styles.seletedOption}>{item.text} - {item.time} - {item.date}</Text>
@@ -197,12 +198,12 @@ const Panier = () => {
 
 
             <View style={{ flexDirection: 'row', backgroundColor: 'inherit', marginTop: 20, flex: 1, width: '100%' }}>
-                <Text style={{ color: 'black', fontSize: 16, flex: 3, textAlign: 'right', padding: 5 }}>Date :</Text>
+                <Text style={{ color: 'black', fontSize: 16, flex: 3, textAlign: 'left', padding: 5 }}>Date :</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setDate}
                     value={date}
-             />
+                />
             </View>
             <View style={{ flexDirection: 'row', backgroundColor: 'inherit', marginTop: 20 }}>
                 <Text style={styles.btnValider} onPress={() => {
@@ -232,20 +233,21 @@ const styles = StyleSheet.create({
     btnAdd: {
         color: '#0096FF',
         textAlign: 'center',
-        paddingTop: 10,
+        paddingTop: 15,
         border: '1px solid #0096FF',
         flex: 1,
-        borderRadius: 50
-    },    
+        borderRadius: 50,
+        width: 50
+    },
     btnDelete: {
         color: 'red',
         flex: 1
     },
-    reservation: { 
+    reservation: {
         border: '1px solid gray',
-        flexDirection: 'row', 
-        backgroundColor: 'whitesmoke', 
-        margin: 10 , 
+        flexDirection: 'row',
+        backgroundColor: 'whitesmoke',
+        margin: 10,
         paddingVertical: 5,
         borderRadius: 5
     },
