@@ -134,37 +134,21 @@ const Panier = () => {
         }
     }
 
-    const space = <View style={{ backgroundColor: 'white', width: 30 }} />
     return (
         <View style={styles.container}>
 
-            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
-                <Picker
-                    selectedValue={selectedValue}
-                    style={{ height: 50, width: '95%', }}
-                    onValueChange={(itemValue: any, itemIndex: any) => setSelectedValue(itemValue)}
-                >
-                    {options.map((item: any, index: number) =>
-                        <Picker.Item label={item.label} value={item.label} key={index} />
-                    )}
-
-                </Picker>
-                {space}
-
-            </View>
-            {role === 'admin' ? <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 1, width: '80%' }}>
-                <Text style={{ color: 'black' }}>Name client :</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setClientName}
-                    value={client}
-                />
-            </View> : <></>}
-
-            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', width: "100%"}}>
+                {role === 'admin' ? <View style={{ flexDirection: 'column', backgroundColor: 'inherit', flex: 6 }}>
+                    <TextInput
+                        style={styles.headerInput}
+                        onChangeText={setClientName}
+                        value={client}
+                        placeholder= {'Client Name'}
+                    />
+                </View> : <></>}
                 <Picker
                     selectedValue={selectedTime}
-                    style={{ height: 50, width: 150, }}
+                    style={styles.headerInput}
                     onValueChange={(itemValue: any, itemIndex: any) => setSelectedTime(itemValue)}
                 >
                     {optionsTime.map((item: any, index: number) =>
@@ -172,24 +156,37 @@ const Panier = () => {
                     )}
 
                 </Picker>
-                {space}
+
+            </View>
+
+
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', width: '100%'}}>
+                <Picker
+                    selectedValue={selectedValue}
+                    style={styles.headerInput}
+                    onValueChange={(itemValue: any, itemIndex: any) => setSelectedValue(itemValue)}
+                >
+                    {options.map((item: any, index: number) =>
+                        <Picker.Item label={item.label} value={item.label} key={index} />
+                    )}
+
+                </Picker>
                 <Text style={styles.btnAdd} onPress={() => addTodo({ id: todoList.length + 1, text: selectedValue, time: selectedTime, date: date, who: (options.find((item) => item.label === selectedValue)?.value) })}>
-                    <FontAwesome size={30} name={'plus'} />
+                    <FontAwesome size={20} name={'plus'} />
                 </Text>
             </View>
             {/* List add */}
-            <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 7, width: '80%' }}>
+            <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 7, width: '100%' }}>
                 {errors.map((item: String, index) => {
                     return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 10 }}>{item}</Text>
                 })}
                 {todoList.length !== 0 ?
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator = {false}>
                         {todoList.map((item: any, index: number) =>
-                            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginBottom: 10 }} key={index}>
+                            <View style={styles.reservation} key={index}>
                                 <Text style={styles.seletedOption}>{item.text} - {item.time} - {item.date}</Text>
-                                {space}
                                 <Text style={styles.btnDelete} onPress={() => deleteTodo(item.id)}>
-                                    <FontAwesome size={30} name={'trash'} />
+                                    <FontAwesome size={15} name={'trash'} />
                                 </Text>
                             </View>
                         )}
@@ -199,15 +196,15 @@ const Panier = () => {
 
 
 
-            <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 1, width: '80%' }}>
-                <Text style={{ color: 'black' }}>Date :</Text>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', marginTop: 20, flex: 1, width: '100%' }}>
+                <Text style={{ color: 'black', fontSize: 16, flex: 3, textAlign: 'right', padding: 5 }}>Date :</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setDate}
                     value={date}
-                />
+             />
             </View>
-            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', marginTop: 20 }}>
                 <Text style={styles.btnValider} onPress={() => {
                     reservation(date)
 
@@ -221,46 +218,70 @@ export default Panier
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: '#dcdcdc',
+        borderRadius: 10,
         flex: 1,
         alignItems: 'center',
-        width: '80%',
+        width: '75%',
+        maxWidth: '750px',
+        minWidth: '250px',
         marginVertical: 20,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        padding: 20
     },
     btnAdd: {
-        color: 'black',
+        color: '#0096FF',
+        textAlign: 'center',
+        paddingTop: 10,
+        border: '1px solid #0096FF',
         flex: 1,
-        // justifyContent: 'center',
-        borderWidth: 1,
-        margin: 5,
-        paddingVertical: 3,
-        paddingHorizontal: 7,
         borderRadius: 50
-    },
+    },    
     btnDelete: {
-        color: 'black',
-
+        color: 'red',
+        flex: 1
+    },
+    reservation: { 
+        border: '1px solid gray',
+        flexDirection: 'row', 
+        backgroundColor: 'whitesmoke', 
+        margin: 10 , 
+        paddingVertical: 5,
+        borderRadius: 5
     },
     seletedOption: {
-        backgroundColor: 'whitesmoke',
         color: 'black',
-        borderWidth: 1,
-        padding: 10,
-        textAlign: 'center',
+        textAlign: 'flex-start',
         justifyContent: 'center',
-        width: '70%'
+        width: '70%',
+        flex: 7,
+        paddingLeft: 50
     },
     input: {
         padding: 5,
         textAlign: 'center',
-        borderWidth: 1,
-        marginTop: 5
+        marginBottom: 5,
+        borderRadius: 5,
+        flex: 9,
+        backgroundColor: 'white',
+        minHeight: 35
     },
     btnValider: {
-        borderWidth: 1,
-        color: 'black',
-        padding: 5,
-        margin: 2
+        color: 'white',
+        backgroundColor: '#0096FF',
+        alignSelf: 'center',
+        textAlign: 'center',
+        borderRadius: 5,
+        padding: 10,
+        width: 200
+    },
+    headerInput: {
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        minHeight: 35,
+        maxHeight: 35,
+        flex: 5,
+        backgroundColor: 'white',
+        margin: 5
     }
 })
