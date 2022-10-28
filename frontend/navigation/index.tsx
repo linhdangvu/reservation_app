@@ -13,11 +13,16 @@ import { Header } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import { UserContext, UserContextProvider } from '../contexts/UserContext';
+import { setMessageToLocal } from '../helpers/MessageHelpers';
+import { setCalendarToLocal } from '../helpers/ReservationHelpers';
+import { setUsersToLocal } from '../helpers/UsersHelpers';
 import useColorScheme from '../hooks/useColorScheme';
 import ArticleDetailScreen from '../screens/ArticleDetailScreen';
 import ArticleScreen from '../screens/ArticleScreen';
 import CalendarScreen from '../screens/CalendarScreen';
+import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import ChatBoxScreen from '../screens/ChatBoxScreen';
+import CheckEmailScreen from '../screens/CheckEmailScreen';
 import InscriptionScreen from '../screens/InscriptionScreen';
 import LoginScreen from '../screens/LoginScreen';
 import MainScreen from '../screens/MainScreen';
@@ -53,6 +58,27 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   const { token } = React.useContext(UserContext);
+
+  // localStorage.removeItem('usersList')
+  // localStorage.removeItem('calendar')
+  // localStorage.removeItem('message')
+
+  // users list in local 
+  if (!localStorage.getItem('usersList')) {
+    console.log("No users data")
+    setUsersToLocal()
+  }
+  if (!localStorage.getItem('calendar')) {
+    console.log("No calendar data")
+    setCalendarToLocal()
+  }
+  if (!localStorage.getItem('message')) {
+    console.log("No message data")
+    setMessageToLocal()
+  }
+  // console.log(localStorage.getItem('usersList'))
+  // console.log(localStorage.getItem('user'))
+
   if (!token) {
     return (
       <Stack.Navigator>
@@ -60,6 +86,8 @@ function RootNavigator() {
         <Stack.Screen name="Article" component={ArticleScreen} options={{ headerShown: false }} />
         <Stack.Screen name="ArticleDetails" component={ArticleDetailScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="CheckEmail" component={CheckEmailScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Inscription" component={InscriptionScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       </Stack.Navigator>
@@ -108,8 +136,8 @@ function BottomTabNavigator() {
         name="Panier"
         component={PanierScreen}
         options={{
-          title: 'Panier',
-          tabBarIcon: ({ color }) => <TabBarIcon name="shopping-basket" color={color} />,
+          title: 'Reservation',
+          tabBarIcon: ({ color }) => <TabBarIcon name="ticket" color={color} />,
         }}
       />
       <BottomTab.Screen

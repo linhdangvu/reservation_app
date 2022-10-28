@@ -20,8 +20,10 @@ export default Message
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         flex: 1,
-        width: '95%'
+        width: '100%',
+        alignItems: 'center',
+        marginVertical: 20
     }
 })

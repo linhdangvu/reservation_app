@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
-        // width: '95%'
+        width: '95%'
     }
 })
