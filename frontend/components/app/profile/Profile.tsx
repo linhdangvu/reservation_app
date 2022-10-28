@@ -52,7 +52,7 @@ export default function Profile() {
         if (notif === "false") return false
         else return true
     }
-    console.log(notif, Boolean(notif))
+    // console.log(notif, Boolean(notif))
     const [isEnabled, setIsEnabled] = useState(notifBoolean);
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState);

@@ -16,7 +16,7 @@ const getMessageList = () => {
 }
 
 const setMessage = (data: any) => {
-    console.log(data)
+    // console.log(data)
 
     if (localStorage.getItem("message")) {
         const messageData: any = getMessageList()

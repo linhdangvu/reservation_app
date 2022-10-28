@@ -38,7 +38,7 @@ const Calendar = () => {
             return user.clientName
         }
         const data: any = users.users.filter((item) => item.id === user.userId)
-        console.log(data)
+        // console.log(data)
         return data[0].firstname + " " + data[0].lastname
     }
 

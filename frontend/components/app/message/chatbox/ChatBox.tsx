@@ -49,7 +49,7 @@ const ChatBox = (props: any) => {
             time: moment().format("DD/MM/YYYY-HH:mm:ss").toString()
         }
         setMessageList([...messageList, data])
-        console.log(messageList)
+        // console.log(messageList)
 
         // add to backend but local temporaire
         setMessage(data)

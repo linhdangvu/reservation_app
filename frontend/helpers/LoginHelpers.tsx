@@ -54,7 +54,7 @@ export function setUser(data: string) {
 
 export function getUserInfo() {
     const user: any = localStorage.getItem('user')
-    console.log(JSON.parse(user).pop())
+    // console.log(JSON.parse(user).pop())
     return { user: JSON.parse(user).pop() }
 }
 

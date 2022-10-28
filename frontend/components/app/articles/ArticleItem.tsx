@@ -20,7 +20,7 @@ const ArticleItem = ({ article }: { article: ArticleProps }) => {
         <TouchableOpacity activeOpacity={0.9} style={styles.container}
             onPress={() => {
                 // navigation.navigate('Login');
-                console.log("Go to detail");
+                // console.log("Go to detail");
                 navigation.navigate('ArticleDetails', {
                     item: article
                 })
