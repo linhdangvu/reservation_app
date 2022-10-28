@@ -6,6 +6,7 @@ import { useRoute } from '@react-navigation/native';
 import { useState } from 'react';
 import * as message from '../../../../data/message.json'
 import moment from 'moment';
+import { getMessageList, setMessage } from '../../../../helpers/MessageHelpers';
 
 
 const ChatBox = (props: any) => {
@@ -23,7 +24,7 @@ const ChatBox = (props: any) => {
     }
 
     console.log(role)
-    const dataMessage = JSON.parse(JSON.stringify(message)).default.message
+    const dataMessage = getMessageList()
     const filteredMessage = dataMessage.filter((item: any) => {
         return item.clientId === Number(clientId)
     })
@@ -49,7 +50,8 @@ const ChatBox = (props: any) => {
         setMessageList([...messageList, data])
         console.log(messageList)
 
-        // add to backend
+        // add to backend but local temporaire
+        setMessage(data)
 
         console.log("Send")
         onChangeText("")
@@ -61,7 +63,7 @@ const ChatBox = (props: any) => {
         <View style={styles.container}>
             <View style={styles.chatView}>
                 <View style={styles.header}>
-                    Name 
+                    Name
                 </View>
                 <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{ flex: 1 }}>
                     {(role === 'admin') ? <View>

@@ -1,12 +1,14 @@
 import { Text, View } from '../../Themed';
-import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
+import { TextInput, StyleSheet, TouchableHighlight, CheckBox, SliderComponent } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword, verifUsers } from '../../../helpers/LoginHelpers';
+import { setUserInfo, verifEmail, verifPassword, verifUsers } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
+import { addUsers, getUsersList, sleep } from '../../../helpers/UsersHelpers';
 
 
 export default function InscriptionForm() {
     const navigation = useNavigation()
+    const usersData = getUsersList()
 
     const [email, setEmail] = useState("")
     const [firstname, setFirstName] = useState("")
@@ -16,18 +18,18 @@ export default function InscriptionForm() {
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
 
-    // login temporaire
-    const user = {
-        email: "test@test.com",
-        password: "1234"
-    }
-
-    const login = ({ email, password }: { email: string, password: string }) => {
+    const signup = async (data: any) => {
         if (isSelected) {
             console.log("Need to set cookie")
         }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
+            localStorage.setItem("email", data.email)
+            localStorage.setItem("notification", "false")
+            addUsers(data)
+            // await sleep(1000)
+            setUserInfo([data])
+            // await sleep(1000)
             window.location.href = "main"
         } else {
             alert("No support storage")
@@ -38,13 +40,25 @@ export default function InscriptionForm() {
         let errorPassword = verifPassword(password),
             errorEmail = verifEmail(email);
         let errorsForm = [];
+        if (lastname == "") errorsForm.push("Write your lastname");
+        if (firstname == "") errorsForm.push("Write your firstname");
         if (errorPassword != "") errorsForm.push(errorPassword);
         if (errorEmail != "") errorsForm.push(errorEmail)
-        if (password !== passwordconfirm) errorsForm.push("Password is the same")
+        if (password !== passwordconfirm) errorsForm.push("Password is not the same")
         if (verifUsers(email, password)) errorsForm.push("Email or password exit")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            login({ password: password, email: email })
+            const data = {
+                "id": usersData.length + 1,
+                "lastname": lastname,
+                "firstname": firstname,
+                "email": email,
+                "phone": "0000000000",
+                "password": password,
+                "role": "client",
+                "image": "https://img.static-rmg.be/a/view/q75/w/h/3322279/petr-sidorov-d3szbcaemhq-unsplash-jpg.jpg"
+            }
+            signup(data)
         }
     }
 

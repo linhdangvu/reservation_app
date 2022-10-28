@@ -1,6 +1,3 @@
-
-
-
 export function verifPassword(password: string) {
     if (password == "") {
         return "Please write password"

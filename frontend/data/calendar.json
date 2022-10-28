@@ -1,65 +1,28 @@
-[
-    {
-        "date": "2022-10-28",
-        "title": "Tarot reading with Lucia",
-        "description": "Intervenant: Lucia \t Time: 07:30 \t Session: 1hr",
-        "userId": 1
-    },
-    {
-        "date": "2022-10-28",
-        "title": "Read your destiny with Yana",
-        "description": "Intervenant: Yana \t Time: 09:00 \t Session: 1hr",
-        "userId": 1
-    },
-    {
-        "date": "2022-10-31",
-        "title": "Futur prediction with Maria",
-        "description": "Intervenant: Maria \t Time: 08:30 \t Session: 1hr",
-        "userId": 1
-    },
-    {
-        "date": "2022-10-24",
-        "title": "Header 2",
-        "description": [
-            {
-                "id": 1,
-                "text": "one"
-            },
-            {
-                "id": 2,
-                "text": "two"
-            }
-        ],
-        "userId": 2
-    },
-    {
-        "date": "2022-10-26",
-        "title": "Header 26",
-        "description": [
-            {
-                "id": 1,
-                "text": "one"
-            },
-            {
-                "id": 2,
-                "text": "two"
-            }
-        ],
-        "userId": 2
-    },
-    {
-        "date": "2022-10-25",
-        "title": "Header 25",
-        "description": [
-            {
-                "id": 1,
-                "text": "one"
-            },
-            {
-                "id": 2,
-                "text": "two"
-            }
-        ],
-        "userId": 3
-    }
-]
+{
+    "calendar": [
+        {
+            "date": "2022-10-27",
+            "title": "Tarot reading with Lucia",
+            "time": "10:00",
+            "description": "Intervenant: Lucia \t Time: 10:00 \t Session: 1hr",
+            "userId": 2,
+            "who": "Lucia"
+        },
+        {
+            "date": "2022-10-28",
+            "title": "Read your destiny with Yana",
+            "time": "11:00",
+            "description": "Intervenant: Yana \t Time: 09:00 \t Session: 1hr",
+            "userId": 3,
+            "who": "Yana"
+        },
+        {
+            "date": "2022-10-31",
+            "title": "Futur prediction with Maria",
+            "time": "12:00",
+            "description": "Intervenant: Maria \t Time: 11:00 \t Session: 1hr",
+            "userId": 2,
+            "who": "Maria"
+        }
+    ]
+}

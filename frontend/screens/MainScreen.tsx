@@ -18,7 +18,6 @@ export default function MainScreen({ navigation }: RootStackScreenProps<'Main'>)
     if (typeof (Storage) !== 'undefined') {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      localStorage.removeItem('calendar');
       window.location.href = "main"
     } else {
       alert("No support storage")

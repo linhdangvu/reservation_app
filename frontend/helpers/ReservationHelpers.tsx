@@ -2,10 +2,17 @@
 import moment from 'moment'
 import * as calendar from '../data/calendar.json'
 
-const compareDate = (date: string) => {
-    const now = moment().format("DD/MM/YYYY-HH:mm:ss").toString()
+const convertReverseDate = (date: string) => {
+    // 2022-10-27 => DD/MM/YYYY
+    return date.slice(8, 10) + "/" + date.slice(5, 7) + "/" + date.slice(0, 4)
+}
+
+const compareDate = (date: string, time: string) => {
+    const formDate = date + "-" + time
+    console.log(formDate)
+    const now = moment().format("DD/MM/YYYY-HH:mm").toString()
     let t1 = now.split('/').join("").split(':').join("").split("-").join("")
-    let t2 = date.split('/').join("").split(':').join("").split("-").join("")
+    let t2 = formDate.split('/').join("").split(':').join("").split("-").join("")
     return Number(t2) - Number(t1) // > 0 => OK
 }
 
@@ -40,22 +47,17 @@ const checkDate = (date: string) => {
 }
 
 const verifDate = (date: string) => {
-    const reg = /\d{2}\/\d{2}\/\d{4}\-\d{2}\:\d{2}\:\d{2}/;
+    // const convert = convertReverseDate(date)
+    const reg = /^\d{2}\/\d{2}\/\d{4}$/;
     if (reg.test(date)) {
-        if (compareDate(date) > 0) {
-            if (checkDate(date)) {
-                return ""
-            } else {
-                return "Not correct date"
-
-            }
+        if (checkDate(date)) {
+            return ""
         } else {
-            return "Date from the past"
-
+            return "This date not exist"
         }
-    } else {
-        return "Need format dd/mm/yyyy-hh:mm"
 
+    } else {
+        return "Need format dd/mm/yyyy"
     }
 }
 
@@ -63,14 +65,15 @@ const setCalendar = (data: any) => {
     console.log(data)
 
     if (localStorage.getItem("calendar")) {
-        const calendarData: any = localStorage.getItem('calendar')
-        let obj = JSON.parse(calendarData)
-        const nData = [...obj, data]
-        console.log(nData)
+        const calendarData: any = getCalendarList()
+        // let obj = JSON.parse(calendarData)
+        // console.log(obj, "erz")
+        const nData = [...calendarData, ...data]
+        // console.log("SEE DATA", nData)
         localStorage.setItem('calendar', JSON.stringify(nData))
     } else {
-        console.log("NOOO")
-        localStorage.setItem('calendar', JSON.stringify([data]))
+        // console.log("NOOO")
+        localStorage.setItem('calendar', JSON.stringify(data))
     }
 }
 
@@ -84,4 +87,20 @@ const getCalendar = () => {
 
 }
 
-export { verifDate, setCalendar, getCalendar }
+// data from local
+const setCalendarToLocal = () => {
+    localStorage.setItem('calendar', JSON.stringify(calendar.calendar))
+}
+
+const getCalendarList = () => {
+    if (localStorage.getItem('calendar')) {
+        let calendarLocal: any = localStorage.getItem('calendar')
+        return JSON.parse(calendarLocal)
+    } else {
+        console.log("There no calendar data")
+        return []
+    }
+}
+
+
+export { verifDate, setCalendar, getCalendar, compareDate, checkDate, setCalendarToLocal, getCalendarList }

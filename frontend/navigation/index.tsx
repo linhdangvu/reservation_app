@@ -13,6 +13,9 @@ import { Header } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import { UserContext, UserContextProvider } from '../contexts/UserContext';
+import { setMessageToLocal } from '../helpers/MessageHelpers';
+import { setCalendarToLocal } from '../helpers/ReservationHelpers';
+import { setUsersToLocal } from '../helpers/UsersHelpers';
 import useColorScheme from '../hooks/useColorScheme';
 import ArticleDetailScreen from '../screens/ArticleDetailScreen';
 import ArticleScreen from '../screens/ArticleScreen';
@@ -53,6 +56,27 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   const { token } = React.useContext(UserContext);
+
+  // localStorage.removeItem('usersList')
+  // localStorage.removeItem('calendar')
+  // localStorage.removeItem('message')
+
+  // users list in local 
+  if (!localStorage.getItem('usersList')) {
+    console.log("No users data")
+    setUsersToLocal()
+  }
+  if (!localStorage.getItem('calendar')) {
+    console.log("No calendar data")
+    setCalendarToLocal()
+  }
+  if (!localStorage.getItem('message')) {
+    console.log("No message data")
+    setMessageToLocal()
+  }
+  console.log(localStorage.getItem('message'))
+  // console.log(localStorage.getItem('user'))
+
   if (!token) {
     return (
       <Stack.Navigator>

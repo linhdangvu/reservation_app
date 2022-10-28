@@ -7,32 +7,34 @@ import { useNavigation } from '@react-navigation/native';
 // import data from "../../../data/users.json"
 import { getUserInfo } from '../../../helpers/LoginHelpers';
 import { verifFirstname, verifPasswordconfirm, verifPhone } from '../../../helpers/SignUpHelpers';
+import { getUsersList, updatePass, updateUsersList } from '../../../helpers/UsersHelpers';
 
-export type UserProps = {
-    id: number;
-    image: string;
-    lastname: string;
-    firstname: string;
-    email: string;
-    phone: string;
-    password: string;
-    role: string
-};
+// export type UserProps = {
+//     id: number;
+//     image: string;
+//     lastname: string;
+//     firstname: string;
+//     email: string;
+//     phone: string;
+//     password: string;
+//     role: string
+// };
 
 export default function Profile() {
     const navigation = useNavigation()
-
+    const userData = getUserInfo().user
     let Users = {
-        id: getUserInfo().user.id,
-        image: getUserInfo().user.image,
-        lastname: getUserInfo().user.lastname,
-        firstname: getUserInfo().user.firstname,
-        email: getUserInfo().user.email,
-        phone: getUserInfo().user.phone,
-        password: getUserInfo().user.password,
-        role: getUserInfo().user.role
+        id: userData.id,
+        image: userData.image,
+        lastname: userData.lastname,
+        firstname: userData.firstname,
+        email: userData.email,
+        phone: userData.phone,
+        password: userData.password,
+        role: userData.role
     }
     // let Index = 0
+    // console.log(Users)
 
 
     const [image, setImage] = useState(Users.image)
@@ -45,14 +47,20 @@ export default function Profile() {
     const [confirmation, setConfirmation] = useState("")
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
-    const [isEnabled, setIsEnabled] = useState(false);
+    const notif = localStorage.getItem('notification')
+    const notifBoolean = () => {
+        if (notif === "false") return false
+        else return true
+    }
+    console.log(notif, Boolean(notif))
+    const [isEnabled, setIsEnabled] = useState(notifBoolean);
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState);
         localStorage.setItem('notification', (!isEnabled).toString())
 
     };
 
-    console.log('data', isEnabled)
+    // console.log('data', isEnabled)
 
     // const Profile = ({ user }: { user: UserProps }) => {
     //     data.users.splice(Index, 1, user)
@@ -74,7 +82,7 @@ export default function Profile() {
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
             let user: any = {
-                id: 0,
+                id: Users.id,
                 image: image,
                 lastname: lastname,
                 firstname: firstname,
@@ -84,8 +92,7 @@ export default function Profile() {
                 role: Users.role
             }
             setUser(user)
-
-
+            updateUsersList(user)
         }
     }
     const updatePassword = () => {
@@ -99,17 +106,17 @@ export default function Profile() {
         setErrors(errorsForm)
         if (errorsForm.length == 0) {
             let user: any = {
-                id: 0,
+                id: Users.id,
                 image: image,
                 lastname: lastname,
                 firstname: firstname,
                 email: email,
                 phone: phone,
-                password: Users.password,
+                password: password,
                 role: Users.role
             }
             setUser(user)
-
+            updatePass(user)
 
         }
     }

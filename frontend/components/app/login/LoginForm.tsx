@@ -3,6 +3,7 @@ import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-nativ
 import React, { useContext, useState } from 'react';
 import { verifEmail, verifPassword, setUserInfo, verifUsers } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
+import { getUsersList } from '../../../helpers/UsersHelpers';
 
 
 export default function LoginForm() {
@@ -12,7 +13,7 @@ export default function LoginForm() {
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
-
+    const usersData = getUsersList()
     const login = ({ email, password }: { email: string, password: string }) => {
         if (isSelected) {
             console.log("Need to set cookie")
@@ -20,8 +21,11 @@ export default function LoginForm() {
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
             localStorage.setItem("email", email)
-            localStorage.setItem("notification", "true")
-            setUserInfo(email)
+            localStorage.setItem("notification", "false")
+            const user = usersData.filter((item: any) => {
+                return item.email === email
+            })
+            setUserInfo(user)
             window.location.href = "main"
         } else {
             alert("No support storage")
