@@ -12,7 +12,7 @@ export default function LoginForm() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState(Array<String>())
-    const [isSelected, setSelection] = useState(false);
+    const [isSelected, setSelection] = useState(true);
     const usersData = getUsersList()
     const login = ({ email, password }: { email: string, password: string }) => {
         if (isSelected) {
@@ -41,7 +41,7 @@ export default function LoginForm() {
         if (!verifUsers(email, password)) errorsForm.push("Email or password not correct")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            login({ password: password, email: email })
+            login({ email: email, password: password })
         }
     }
 
