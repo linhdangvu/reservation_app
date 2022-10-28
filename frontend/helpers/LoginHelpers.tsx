@@ -29,6 +29,12 @@ export function verifUsers(email: string, password: string) {
     })
 }
 
+export function verifUsersEmail(email: string) {
+    return usersData.some((item: any) => {
+        return item.email === email
+    })
+}
+
 export function setUserInfo(user: any) {
     // console.log("???3", email)
     // const user = usersData.filter((item: any) => {

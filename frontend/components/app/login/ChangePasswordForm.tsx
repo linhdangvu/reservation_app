@@ -1,89 +1,78 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword, setUserInfo, verifUsers } from '../../../helpers/LoginHelpers';
-import { useNavigation } from '@react-navigation/native';
-import { getUsersList } from '../../../helpers/UsersHelpers';
+import { verifPassword } from '../../../helpers/LoginHelpers';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { getUsersList, updatePass } from '../../../helpers/UsersHelpers';
 
 
-export default function LoginForm() {
+export default function ChangePasswordForm() {
     const navigation = useNavigation()
-
-    const [email, setEmail] = useState("")
+    const route = useRoute()
+    const [email, setEmail] = useState(route.params?.email)
     const [password, setPassword] = useState("")
+    const [passwordconfirm, setPasswordConfirm] = useState("")
     const [errors, setErrors] = useState(Array<String>())
     const [isSelected, setSelection] = useState(false);
     const usersData = getUsersList()
-    const login = ({ email, password }: { email: string, password: string }) => {
-        if (isSelected) {
-            console.log("Need to set cookie")
-        }
-        if (typeof (Storage) !== 'undefined') {
-            localStorage.setItem("token", "aqwxszedc");
-            localStorage.setItem("email", email)
-            localStorage.setItem("notification", "false")
-            const user = usersData.filter((item: any) => {
-                return item.email === email
-            })
-            setUserInfo(user)
-            window.location.href = "main"
-        } else {
-            alert("No support storage")
-        }
+    const changePass = (email: string, pass: string) => {
+        let usersList = getUsersList()
+        const userData = usersList.filter((item: any) => {
+            return item.email === email
+        })
+        // setUser(userData)
+        userData[0].password = pass
+        // console.log(userData)
+        updatePass(userData[0])
+        // const notif = localStorage.getItem('notification')
+        // if (notif === "true") {
+        alert("Notification: Change password successful")
+        // }
     }
 
     const verifLogin = () => {
-        let errorPassword = verifPassword(password),
-            errorEmail = verifEmail(email);
+        let errPass = verifPassword(password)
+        let errPassConf = verifPassword(passwordconfirm)
         let errorsForm = [];
-        if (errorPassword != "") errorsForm.push(errorPassword);
-        if (errorEmail != "") errorsForm.push(errorEmail)
-        if (!verifUsers(email, password)) errorsForm.push("Email or password not correct")
+        // if (errorPassword != "") errorsForm.push(errorPassword);
+        if (errPass != "") errorsForm.push(errPass)
+        if (errPassConf != "") errorsForm.push(errPassConf)
+        if (password !== passwordconfirm) errorsForm.push("Password is not the same")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            login({ password: password, email: email })
+            // login({ password: password, email: email })
+            changePass(email, password)
+            navigation.navigate('Login')
         }
     }
 
     return (
         <View style={styles.containers}>
-            <Text style={styles.labelText}>Email:</Text>
-            <View style={styles.inputLine}>
-                <TextInput style={styles.textInput}
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder="email@example.com" />
-            </View>
             <Text style={styles.labelText}>Password:</Text>
             <View style={styles.inputLine}>
                 <TextInput style={styles.textInput}
                     value={password}
-                    secureTextEntry={true}
                     onChangeText={setPassword}
-
-                    placeholder="Password" />
+                    secureTextEntry={true}
+                    placeholder="password" />
+            </View>
+            <Text style={styles.labelText}>Password:</Text>
+            <View style={styles.inputLine}>
+                <TextInput style={styles.textInput}
+                    value={passwordconfirm}
+                    onChangeText={setPasswordConfirm}
+                    secureTextEntry={true}
+                    placeholder="password confirmation" />
             </View>
             {errors.map((item: String, index) => {
                 return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 22 }}>{item}</Text>
             })}
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    value={isSelected}
-                    onValueChange={setSelection}
-                    style={styles.checkbox}
-                />
-                <Text style={styles.labelCheckBox}>Remember Me</Text>
-            </View>
+
             <TouchableHighlight style={styles.button}
                 onPress={verifLogin}>
-                <Text style={styles.buttonText}>Sign in</Text>
+                <Text style={styles.buttonText}>Change password</Text>
             </TouchableHighlight>
-            <View style={styles.footerLogin}>
-                <Text style={styles.textFooter}>New around here ?
-                    <Text onPress={() => { navigation.navigate('Inscription') }} style={styles.sousTextFooter}>Sign Up</Text>
-                </Text>
-                <Text onPress={() => { navigation.navigate('CheckEmail') }} style={styles.textFooter}>Forgot your Password ?</Text>
-            </View>
+
         </View>
     )
 }
@@ -165,4 +154,6 @@ const styles = StyleSheet.create({
         marginLeft: 5
     }
 });
+
+
 

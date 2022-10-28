@@ -20,7 +20,9 @@ import useColorScheme from '../hooks/useColorScheme';
 import ArticleDetailScreen from '../screens/ArticleDetailScreen';
 import ArticleScreen from '../screens/ArticleScreen';
 import CalendarScreen from '../screens/CalendarScreen';
+import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import ChatBoxScreen from '../screens/ChatBoxScreen';
+import CheckEmailScreen from '../screens/CheckEmailScreen';
 import InscriptionScreen from '../screens/InscriptionScreen';
 import LoginScreen from '../screens/LoginScreen';
 import MainScreen from '../screens/MainScreen';
@@ -84,6 +86,8 @@ function RootNavigator() {
         <Stack.Screen name="Article" component={ArticleScreen} options={{ headerShown: false }} />
         <Stack.Screen name="ArticleDetails" component={ArticleDetailScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="CheckEmail" component={CheckEmailScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Inscription" component={InscriptionScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       </Stack.Navigator>

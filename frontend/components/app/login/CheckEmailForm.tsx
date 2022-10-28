@@ -1,12 +1,12 @@
 import { Text, View } from '../../Themed';
 import { TextInput, StyleSheet, TouchableHighlight, CheckBox } from 'react-native';
 import React, { useContext, useState } from 'react';
-import { verifEmail, verifPassword, setUserInfo, verifUsers } from '../../../helpers/LoginHelpers';
+import { verifEmail, verifPassword, setUserInfo, verifUsers, verifUsersEmail } from '../../../helpers/LoginHelpers';
 import { useNavigation } from '@react-navigation/native';
 import { getUsersList } from '../../../helpers/UsersHelpers';
 
 
-export default function LoginForm() {
+export default function CheckEmailForm() {
     const navigation = useNavigation()
 
     const [email, setEmail] = useState("")
@@ -33,15 +33,15 @@ export default function LoginForm() {
     }
 
     const verifLogin = () => {
-        let errorPassword = verifPassword(password),
-            errorEmail = verifEmail(email);
+        let errorEmail = verifEmail(email);
         let errorsForm = [];
-        if (errorPassword != "") errorsForm.push(errorPassword);
+        // if (errorPassword != "") errorsForm.push(errorPassword);
         if (errorEmail != "") errorsForm.push(errorEmail)
-        if (!verifUsers(email, password)) errorsForm.push("Email or password not correct")
+        if (!verifUsersEmail(email)) errorsForm.push("Email not existe")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            login({ password: password, email: email })
+            // login({ password: password, email: email })
+            navigation.navigate('ChangePassword', { email: email })
         }
     }
 
@@ -54,36 +54,15 @@ export default function LoginForm() {
                     onChangeText={setEmail}
                     placeholder="email@example.com" />
             </View>
-            <Text style={styles.labelText}>Password:</Text>
-            <View style={styles.inputLine}>
-                <TextInput style={styles.textInput}
-                    value={password}
-                    secureTextEntry={true}
-                    onChangeText={setPassword}
-
-                    placeholder="Password" />
-            </View>
             {errors.map((item: String, index) => {
                 return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 22 }}>{item}</Text>
             })}
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    value={isSelected}
-                    onValueChange={setSelection}
-                    style={styles.checkbox}
-                />
-                <Text style={styles.labelCheckBox}>Remember Me</Text>
-            </View>
+
             <TouchableHighlight style={styles.button}
                 onPress={verifLogin}>
-                <Text style={styles.buttonText}>Sign in</Text>
+                <Text style={styles.buttonText}>Check Email</Text>
             </TouchableHighlight>
-            <View style={styles.footerLogin}>
-                <Text style={styles.textFooter}>New around here ?
-                    <Text onPress={() => { navigation.navigate('Inscription') }} style={styles.sousTextFooter}>Sign Up</Text>
-                </Text>
-                <Text onPress={() => { navigation.navigate('CheckEmail') }} style={styles.textFooter}>Forgot your Password ?</Text>
-            </View>
+
         </View>
     )
 }
