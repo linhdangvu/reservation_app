@@ -9,7 +9,7 @@ const convertReverseDate = (date: string) => {
 
 const compareDate = (date: string, time: string) => {
     const formDate = date + "-" + time
-    console.log(formDate)
+    // console.log(formDate)
     const now = moment().format("DD/MM/YYYY-HH:mm").toString()
     let t1 = now.split('/').join("").split(':').join("").split("-").join("")
     let t2 = formDate.split('/').join("").split(':').join("").split("-").join("")
@@ -62,7 +62,7 @@ const verifDate = (date: string) => {
 }
 
 const setCalendar = (data: any) => {
-    console.log(data)
+    // console.log(data)
 
     if (localStorage.getItem("calendar")) {
         const calendarData: any = getCalendarList()

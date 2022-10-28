@@ -87,7 +87,7 @@ const Panier = () => {
         }
         setErrors(errorForm)
         if (errorForm.length === 0) {
-            console.log("add")
+            // console.log("add")
             item.date = convertDate
             setTodoList([...todoList, item])
         }

@@ -38,7 +38,7 @@ const updateUsersList = (user: any) => {
                 return item
             }
         })
-        console.log(ndata)
+        // console.log(ndata)
         localStorage.setItem('usersList', JSON.stringify(ndata))
     } else {
         console.log("There no users data")
@@ -56,7 +56,7 @@ const updatePass = (user: any) => {
                 return item
             }
         })
-        console.log(ndata)
+        // console.log(ndata)
         localStorage.setItem('usersList', JSON.stringify(ndata))
     } else {
         console.log("There no users data")
