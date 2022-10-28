@@ -85,6 +85,7 @@ const ChatBox = (props: any) => {
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.input}
+                    multiline={true}
                     onChangeText={onChangeText}
                     value={text}
                     placeholder="Message..."

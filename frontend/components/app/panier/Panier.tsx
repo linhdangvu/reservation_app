@@ -1,5 +1,7 @@
 import { Text, View } from '../../Themed';
-import { ScrollView, StyleSheet, TextInput, Picker, Button, requireNativeComponent } from 'react-native';
+import { ScrollView, StyleSheet, TextInput, Picker, Modal, Button, requireNativeComponent } from 'react-native';
+
+import CalendarPicker from 'react-native-calendar-picker';
 
 import { getUserInfo } from '../../../helpers/LoginHelpers';
 import { useState } from 'react';
@@ -53,6 +55,7 @@ const Panier = () => {
 
     const [todoList, setTodoList] = useState(Array<TodoList>)
     const [client, setClientName] = useState("")
+    const [modalVisible, setModalVisible] = useState(false);
 
     const convertFormDate = (date: string) => {
         // 27/10/2022 => 2022-10-27
@@ -134,62 +137,68 @@ const Panier = () => {
         }
     }
 
-    const space = <View style={{ backgroundColor: 'white', width: 30 }} />
     return (
         <View style={styles.container}>
-
-            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
-                <Picker
-                    selectedValue={selectedValue}
-                    style={{ height: 50, width: '95%', }}
-                    onValueChange={(itemValue: any, itemIndex: any) => setSelectedValue(itemValue)}
-                >
-                    {options.map((item: any, index: number) =>
-                        <Picker.Item label={item.label} value={item.label} key={index} />
-                    )}
-
-                </Picker>
-                {space}
-
-            </View>
-            {role === 'admin' ? <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 1, width: '80%' }}>
-                <Text style={{ color: 'black' }}>Name client :</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setClientName}
-                    value={client}
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                setModalVisible(!modalVisible);
+                }}
+            >
+                <CalendarPicker
+                    onDateChange={setDate}
+                    previousTitle='<'
+                    nextTitle='>'
+                    height={100}
+                    width={100}
+                    textStyle={{ color: "white" }}
+                    selectedDayColor='#f1883f'
                 />
-            </View> : <></>}
+            </Modal>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', width: '100%'}}>
+                <View style = {styles.selection}>
+                    <Picker
+                        selectedValue={selectedTime}
+                        style={styles.input}
+                        onValueChange={(itemValue: any, itemIndex: any) => setSelectedTime(itemValue)}
+                    >
+                        {optionsTime.map((item: any, index: number) =>
+                            <Picker.Item label={item} value={item} key={index} />
+                        )}
 
-            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
-                <Picker
-                    selectedValue={selectedTime}
-                    style={{ height: 50, width: 150, }}
-                    onValueChange={(itemValue: any, itemIndex: any) => setSelectedTime(itemValue)}
-                >
-                    {optionsTime.map((item: any, index: number) =>
-                        <Picker.Item label={item} value={item} key={index} />
-                    )}
+                    </Picker>
+                    <Picker
+                        selectedValue={selectedValue}
+                        style={styles.input}
+                        onValueChange={(itemValue: any, itemIndex: any) => setSelectedValue(itemValue)}
+                    >
+                        {options.map((item: any, index: number) =>
+                            <Picker.Item label={item.label} value={item.label} key={index} />
+                        )}
 
-                </Picker>
-                {space}
-                <Text style={styles.btnAdd} onPress={() => addTodo({ id: todoList.length + 1, text: selectedValue, time: selectedTime, date: date, who: (options.find((item) => item.label === selectedValue)?.value) })}>
-                    <FontAwesome size={30} name={'plus'} />
-                </Text>
+                    </Picker>
+                </View>
+                <View style={styles.addComp}>          
+                    <Text style={styles.btnAdd} onPress={() => addTodo({ id: todoList.length + 1, text: selectedValue, time: selectedTime, date: date })}>
+                        <FontAwesome size={30} name={'plus'} />
+                    </Text>
+                </View>
+                
             </View>
             {/* List add */}
-            <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 7, width: '80%' }}>
+            <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 7, width: '100%' }}>
                 {errors.map((item: String, index) => {
-                    return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 10 }}>{item}</Text>
+                    return <Text key={index} lightColor='red' darkColor='red' style={{ marginHorizontal: 20 }}>{item}</Text>
                 })}
                 {todoList.length !== 0 ?
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator = {false}>
                         {todoList.map((item: any, index: number) =>
-                            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginBottom: 10 }} key={index}>
-                                <Text style={styles.seletedOption}>{item.text} - {item.time} - {item.date}</Text>
-                                {space}
+                            <View style={styles.reservation} key={index}>
+                                <Text style={styles.seletedOption}>{item.text} - {item.date} - {item.time}</Text>
                                 <Text style={styles.btnDelete} onPress={() => deleteTodo(item.id)}>
-                                    <FontAwesome size={30} name={'trash'} />
+                                    <FontAwesome size={20} name={'trash'} />
                                 </Text>
                             </View>
                         )}
@@ -199,15 +208,22 @@ const Panier = () => {
 
 
 
-            <View style={{ flexDirection: 'column', backgroundColor: 'white', marginTop: 20, flex: 1, width: '80%' }}>
-                <Text style={{ color: 'black' }}>Date :</Text>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', marginTop: 20, flex: 1, width: '100%' }}>
+                <Text style={{ color: 'black', fontSize: 16, flex: 1, textAlign: 'right', padding: 5 }}>Date :</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setDate}
                     value={date}
                 />
+                {/*
+                    errors.length > 0 ?
+                    
+                        <Text style={{ color: 'red' }}>{errors}</Text>
+                        : <></>
+             */}
+
             </View>
-            <View style={{ flexDirection: 'row', backgroundColor: 'white', marginTop: 20 }}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'inherit', marginTop: 20 }}>
                 <Text style={styles.btnValider} onPress={() => {
                     reservation(date)
 
@@ -221,46 +237,72 @@ export default Panier
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: '#dcdcdc',
+        borderRadius: 10,
         flex: 1,
         alignItems: 'center',
-        width: '80%',
+        width: '75%',
+        maxWidth: '750px',
+        minWidth: '250px',
         marginVertical: 20,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        padding: 20
+    },
+    addComp: {
+        flex: 1,
+        backgroundColor: 'inherit', 
+        alignItems: 'center',
+    },
+    selection:{
+        flex: 5,
+        backgroundColor: 'inherit', 
     },
     btnAdd: {
-        color: 'black',
-        flex: 1,
-        // justifyContent: 'center',
-        borderWidth: 1,
-        margin: 5,
-        paddingVertical: 3,
-        paddingHorizontal: 7,
+        color: '#0096FF',
+        textAlign: 'center',
+        border: '2px solid #0096FF',
+        margin: 7,
+        padding: 15,
         borderRadius: 50
-    },
-    btnDelete: {
-        color: 'black',
 
     },
+    btnDelete: {
+        color: 'red',
+        flex: 1
+    },
+    reservation: { 
+        border: '1px solid gray',
+        flexDirection: 'row', 
+        backgroundColor: 'whitesmoke', 
+        margin: 10 , 
+        paddingVertical: 5,
+        borderRadius: 5
+    },
     seletedOption: {
-        backgroundColor: 'whitesmoke',
         color: 'black',
-        borderWidth: 1,
-        padding: 10,
-        textAlign: 'center',
+        textAlign: 'flex-start',
         justifyContent: 'center',
-        width: '70%'
+        width: '70%',
+        flex: 7,
+        paddingLeft: 50
     },
     input: {
         padding: 5,
         textAlign: 'center',
-        borderWidth: 1,
-        marginTop: 5
+        marginBottom: 5,
+        borderRadius: 5,
+        flex: 14,
+        backgroundColor: 'white',
+        minHeight: 35
     },
     btnValider: {
-        borderWidth: 1,
-        color: 'black',
-        padding: 5,
-        margin: 2
+        color: 'white',
+        backgroundColor: '#0096FF',
+        alignSelf: 'center',
+        textAlign: 'center',
+        borderRadius: 5,
+        padding: 10,
+        width: 200
     }
+
 })
