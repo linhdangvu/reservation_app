@@ -3,15 +3,11 @@
 ```bash
 npm install expo-cli --global
 ```
-2. Init project
-```bash
-expo init project-test
-```
-3. Install webpack
+2. Install webpack
 ```bash
 expo install @expo/webpack-config@^0.17.0
 ```
-4. Run project
+3. Run project
 ```bash
 npm start 
 ```
@@ -19,6 +15,10 @@ ou
 ```bash
 yarn start
 ```
+
+## Admin 
+email: admin@cfa.com
+password: cfa
 
 ### Cours
 Date 24/10/2022 <br>
@@ -32,3 +32,5 @@ Date 25/10/2022
 
 ### Code de Prof
 [Reservation App](https://gitlab.com/joan.g.francois/reservationapp)
+
+
