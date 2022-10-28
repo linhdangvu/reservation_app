@@ -74,7 +74,7 @@ function RootNavigator() {
     console.log("No message data")
     setMessageToLocal()
   }
-  console.log(localStorage.getItem('message'))
+  console.log(localStorage.getItem('usersList'))
   // console.log(localStorage.getItem('user'))
 
   if (!token) {

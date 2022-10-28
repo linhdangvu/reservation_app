@@ -2,11 +2,12 @@ import { Text, View } from '../../Themed';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import * as client from '../../../data/users.json'
 import { useNavigation } from '@react-navigation/native';
+import { getUsersList } from '../../../helpers/UsersHelpers';
 
 const AdminMessage = () => {
 
 
-    let dataClient = JSON.parse(JSON.stringify(client)).default.users
+    let dataClient = getUsersList()
 
     dataClient = dataClient.filter((item: any) => {
         return item.role === "client"
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     nameClient: {
         backgroundColor: 'inherit',
         flex: 1,
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'flex-start',
         paddingLeft: 10
     }
