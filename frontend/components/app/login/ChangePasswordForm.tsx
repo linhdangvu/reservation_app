@@ -9,20 +9,18 @@ import { getUsersList, updatePass } from '../../../helpers/UsersHelpers';
 export default function ChangePasswordForm() {
     const navigation = useNavigation()
     const route = useRoute()
+
     const [email, setEmail] = useState(route.params?.email)
     const [password, setPassword] = useState("")
     const [passwordconfirm, setPasswordConfirm] = useState("")
     const [errors, setErrors] = useState(Array<String>())
-    const [isSelected, setSelection] = useState(false);
-    const usersData = getUsersList()
+
     const changePass = (email: string, pass: string) => {
         let usersList = getUsersList()
         const userData = usersList.filter((item: any) => {
             return item.email === email
         })
-        // setUser(userData)
         userData[0].password = pass
-        // console.log(userData)
         updatePass(userData[0])
         // const notif = localStorage.getItem('notification')
         // if (notif === "true") {
@@ -30,17 +28,15 @@ export default function ChangePasswordForm() {
         // }
     }
 
-    const verifLogin = () => {
+    const checkForm = () => {
         let errPass = verifPassword(password)
         let errPassConf = verifPassword(passwordconfirm)
         let errorsForm = [];
-        // if (errorPassword != "") errorsForm.push(errorPassword);
         if (errPass != "") errorsForm.push(errPass)
         if (errPassConf != "") errorsForm.push(errPassConf)
         if (password !== passwordconfirm) errorsForm.push("Password is not the same")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            // login({ password: password, email: email })
             changePass(email, password)
             navigation.navigate('Login')
         }
@@ -69,7 +65,7 @@ export default function ChangePasswordForm() {
             })}
 
             <TouchableHighlight style={styles.button}
-                onPress={verifLogin}>
+                onPress={checkForm}>
                 <Text style={styles.buttonText}>Change password</Text>
             </TouchableHighlight>
 

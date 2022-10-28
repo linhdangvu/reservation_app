@@ -8,43 +8,36 @@ import moment from 'moment';
 import * as users from '../../../data/users.json'
 import { getUserInfo } from '../../../helpers/LoginHelpers';
 import { getCalendar, getCalendarList } from '../../../helpers/ReservationHelpers';
-import { useRoute } from '@react-navigation/native';
 
 const Calendar = () => {
-    const route = useRoute()
+    // init 
     const userId = getUserInfo().user.id
     const role = getUserInfo().user.role
-    // const arrCalendar = getCalendar()
-    const calendarData = getCalendarList()
-
-    const [selectedStartDate, setSelectedStartDate] = useState(moment);
-    const startDate = selectedStartDate
-        ? selectedStartDate.format('YYYY-MM-DD').toString()
-        : ''
-    // const dataCalendar = [...JSON.parse(JSON.stringify(data)).default, ...arrCalendar]
-    // console.log(dataCalendar)
-    const info = calendarData.filter((item: any) => {
-        return (role === 'admin' ? item.date === startDate : item.date === startDate && item.userId === userId)
-    })
-    // const dataCalendar = JSON.parse(JSON.stringify(data))
-    // const info = dataCalendar.default.filter((item: any) => { return item.date === startDate && item.userId === userId })
     let vw = (window.innerWidth) * 0.7
     let vh = (window.innerHeight) * 0.5
     if (vw < 300) { vw = 300 }
     if (vh < 300) { vh = 300 }
+
+    // calendar
+    const calendarData = getCalendarList()
+    const [selectedStartDate, setSelectedStartDate] = useState(moment);
+    const startDate = selectedStartDate
+        ? selectedStartDate.format('YYYY-MM-DD').toString()
+        : ''
+    const info = calendarData.filter((item: any) => {
+        return (role === 'admin' ? item.date === startDate : item.date === startDate && item.userId === userId)
+    })
 
     const getUserName = (user: any) => {
         if (user.userId === 1) {
             return user.clientName
         }
         const data: any = users.users.filter((item) => item.id === user.userId)
-        // console.log(data)
         return data[0].firstname + " " + data[0].lastname
     }
 
     return (
         <View style={styles.container}>
-
             <CalendarPicker
                 onDateChange={setSelectedStartDate}
                 previousTitle='<'
@@ -66,11 +59,7 @@ const Calendar = () => {
                     )
                 })}
             </ScrollView>
-
-
-
         </View >
-
     )
 }
 

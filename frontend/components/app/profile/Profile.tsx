@@ -3,25 +3,22 @@ import { TextInput, StyleSheet, TouchableHighlight, Image, Switch } from 'react-
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
 import { setUser, verifEmail, verifPassword } from '../../../helpers/LoginHelpers';
-import { useNavigation } from '@react-navigation/native';
-// import data from "../../../data/users.json"
 import { getUserInfo } from '../../../helpers/LoginHelpers';
 import { verifFirstname, verifPasswordconfirm, verifPhone } from '../../../helpers/SignUpHelpers';
-import { getUsersList, updatePass, updateUsersList } from '../../../helpers/UsersHelpers';
+import { updatePass, updateUsersList } from '../../../helpers/UsersHelpers';
 
-// export type UserProps = {
-//     id: number;
-//     image: string;
-//     lastname: string;
-//     firstname: string;
-//     email: string;
-//     phone: string;
-//     password: string;
-//     role: string
-// };
+export type UserProps = {
+    id: number;
+    image: string;
+    lastname: string;
+    firstname: string;
+    email: string;
+    phone: string;
+    password: string;
+    role: string
+};
 
 export default function Profile() {
-    const navigation = useNavigation()
     const userData = getUserInfo().user
     let Users = {
         id: userData.id,
@@ -33,49 +30,36 @@ export default function Profile() {
         password: userData.password,
         role: userData.role
     }
-    // let Index = 0
-    // console.log(Users)
 
+    // set notif
+    const notif = localStorage.getItem('notification')
+    const notifBoolean = () => {
+        if (notif === "false") return false
+        else return true
+    }
 
     const [image, setImage] = useState(Users.image)
     const [lastname, setLastname] = useState(Users.lastname)
     const [firstname, setFirstname] = useState(Users.firstname)
     const [email, setEmail] = useState(Users.email)
     const [phone, setPhone] = useState(Users.phone)
-
     const [password, setPassword] = useState("")
     const [confirmation, setConfirmation] = useState("")
     const [errors, setErrors] = useState(Array<String>())
-    const [isSelected, setSelection] = useState(false);
-    const notif = localStorage.getItem('notification')
-    const notifBoolean = () => {
-        if (notif === "false") return false
-        else return true
-    }
-    // console.log(notif, Boolean(notif))
     const [isEnabled, setIsEnabled] = useState(notifBoolean);
+
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState);
         localStorage.setItem('notification', (!isEnabled).toString())
         if (!isEnabled) alert("Notification active")
-
     };
 
-    // console.log('data', isEnabled)
-
-    // const Profile = ({ user }: { user: UserProps }) => {
-    //     data.users.splice(Index, 1, user)
-
-    // }
-
-
-    const verifProfile = () => {
+    const updateProfile = () => {
         let errorEmail = verifEmail(email);
         let errorPhone = verifPhone(phone);
         let errorFirstname = verifFirstname(firstname);
         let errorLastname = verifFirstname(lastname);
         let errorsForm = [];
-        // manque verifphone
         if (errorEmail !== "") errorsForm.push(errorEmail)
         if (errorPhone !== "") errorsForm.push(errorPhone)
         if (errorFirstname !== "") errorsForm.push(errorFirstname)
@@ -96,6 +80,7 @@ export default function Profile() {
             updateUsersList(user)
         }
     }
+
     const updatePassword = () => {
         let errorPassword = verifPassword(password);
         let errorConfirmation = verifPasswordconfirm(password, confirmation);
@@ -121,23 +106,6 @@ export default function Profile() {
 
         }
     }
-
-    {/*
-            const verifLogin = () => {
-        let errorPassword = verifPassword(password),
-            errorEmail = verifEmail(email);
-        let errorsForm = [];
-        if (errorPassword != "") errorsForm.push(errorPassword);
-        if (errorEmail != "") errorsForm.push(errorEmail)
-        if (email != user.email && password != user.password) errorsForm.push("Email or password not correct")
-        setErrors(errorsForm);
-        if (errorsForm.length == 0) {
-            login({ password: password, email: email })
-        }
-    }
-*/}
-
-
 
     return (
         <View style={styles.containers}>
@@ -169,7 +137,7 @@ export default function Profile() {
                 </View>
             </View>
             <TouchableHighlight style={styles.button}
-                onPress={verifProfile}>
+                onPress={updateProfile}>
                 <Text style={styles.buttonText}>Update profile</Text>
             </TouchableHighlight>
             <View style={{ backgroundColor: 'inherit' }}>

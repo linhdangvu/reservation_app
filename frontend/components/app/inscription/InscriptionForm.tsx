@@ -16,27 +16,25 @@ export default function InscriptionForm() {
     const [password, setPassword] = useState("")
     const [passwordconfirm, setPasswordconfirm] = useState("")
     const [errors, setErrors] = useState(Array<String>())
-    const [isSelected, setSelection] = useState(false);
+    // const [isSelected, setSelection] = useState(false);
 
-    const signup = async (data: any) => {
-        if (isSelected) {
-            console.log("Need to set cookie")
-        }
+    const signup = (data: any) => {
+        // if (isSelected) {
+        //     console.log("Need to set cookie")
+        // }
         if (typeof (Storage) !== 'undefined') {
             localStorage.setItem("token", "aqwxszedc");
             localStorage.setItem("email", data.email)
             localStorage.setItem("notification", "false")
             addUsers(data)
-            // await sleep(1000)
             setUserInfo([data])
-            // await sleep(1000)
             window.location.href = "main"
         } else {
             alert("No support storage")
         }
     }
 
-    const verifLogin = () => {
+    const checkForm = () => {
         let errorPassword = verifPassword(password),
             errorPasswordC = verifPassword(passwordconfirm),
             errorEmail = verifEmail(email);
@@ -122,7 +120,7 @@ export default function InscriptionForm() {
             })}
 
             <TouchableHighlight style={styles.button}
-                onPress={verifLogin}>
+                onPress={checkForm}>
                 <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableHighlight>
         </View>

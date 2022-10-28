@@ -11,6 +11,7 @@ import { getUsersList } from '../../../../helpers/UsersHelpers';
 
 
 const ChatBox = (props: any) => {
+    //init 
     const route = useRoute()
     let clientId = ''
     let role = ''
@@ -24,18 +25,18 @@ const ChatBox = (props: any) => {
         role = route.params?.role
     }
     const userList = getUsersList()
-    console.log(role)
     const dataMessage = getMessageList()
+
     const filteredMessage = dataMessage.filter((item: any) => {
         return item.clientId === Number(clientId)
     })
-    // console.log(filteredMessage)
+
     let sortMessage = filteredMessage.sort((a: any, b: any) => {
         let t1 = a.time.split('/').join("").split(':').join("").split("-").join("")
         let t2 = b.time.split('/').join("").split(':').join("").split("-").join("")
         return t1 - t2
     })
-    // console.log(sortMessage)
+
     const [text, onChangeText] = useState("")
     const [messageList, setMessageList] = useState(sortMessage)
 
@@ -60,7 +61,6 @@ const ChatBox = (props: any) => {
 
     const getClientName = (id: string) => {
         const client = userList.filter((item: any) => item.id === Number(id))
-        // console.log(client)
         return client[0].firstname + " " + client[0].lastname
     }
 

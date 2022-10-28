@@ -12,35 +12,15 @@ export default function CheckEmailForm() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState(Array<String>())
-    const [isSelected, setSelection] = useState(false);
     const usersData = getUsersList()
-    const login = ({ email, password }: { email: string, password: string }) => {
-        if (isSelected) {
-            console.log("Need to set cookie")
-        }
-        if (typeof (Storage) !== 'undefined') {
-            localStorage.setItem("token", "aqwxszedc");
-            localStorage.setItem("email", email)
-            localStorage.setItem("notification", "false")
-            const user = usersData.filter((item: any) => {
-                return item.email === email
-            })
-            setUserInfo(user)
-            window.location.href = "main"
-        } else {
-            alert("No support storage")
-        }
-    }
 
-    const verifLogin = () => {
+    const checkForm = () => {
         let errorEmail = verifEmail(email);
         let errorsForm = [];
-        // if (errorPassword != "") errorsForm.push(errorPassword);
         if (errorEmail != "") errorsForm.push(errorEmail)
         if (!verifUsersEmail(email)) errorsForm.push("Email not existe")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            // login({ password: password, email: email })
             navigation.navigate('ChangePassword', { email: email })
         }
     }
@@ -59,7 +39,7 @@ export default function CheckEmailForm() {
             })}
 
             <TouchableHighlight style={styles.button}
-                onPress={verifLogin}>
+                onPress={checkForm}>
                 <Text style={styles.buttonText}>Check Email</Text>
             </TouchableHighlight>
 

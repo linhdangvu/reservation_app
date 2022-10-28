@@ -18,14 +18,12 @@ export type TodoList = {
 };
 
 const Panier = () => {
+    // init
+    const navigation = useNavigation()
     const role = getUserInfo().user.role
-
-    const [selectedValue, setSelectedValue] = useState("Tarot reading with Lucia");
-    const [selectedTime, setSelectedTime] = useState("10:00");
-    // const [selectedDuration, setSelectedDuration] = useState("Morning");
     const calendarData: any = getCalendarList()
-    // const dataCalendar: any = [...JSON.parse(JSON.stringify(calendar)).default, ...arrCalendar]
-    // console.log(dataCalendar)
+
+    // data to select
     const options = [
         {
             id: 1,
@@ -47,10 +45,11 @@ const Panier = () => {
     const optionsTime = [
         "10:00", "11:00", "12:00", "14:00", "15:00", "16:00"
     ]
-    const navigation = useNavigation()
+
+    const [selectedValue, setSelectedValue] = useState("Tarot reading with Lucia");
+    const [selectedTime, setSelectedTime] = useState("10:00");
     const [date, setDate] = useState(moment().format("DD/MM/YYYY").toString())
     const [errors, setErrors] = useState(Array<String>)
-
     const [todoList, setTodoList] = useState(Array<TodoList>)
     const [client, setClientName] = useState("")
 
@@ -91,9 +90,6 @@ const Panier = () => {
             item.date = convertDate
             setTodoList([...todoList, item])
         }
-
-
-
     }
 
     const deleteTodo = (todoId: number) => {

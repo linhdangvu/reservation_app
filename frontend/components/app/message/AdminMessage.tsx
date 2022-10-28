@@ -6,16 +6,12 @@ import { getUsersList } from '../../../helpers/UsersHelpers';
 
 const AdminMessage = () => {
 
-
+    const navigation = useNavigation()
     let dataClient = getUsersList()
 
     dataClient = dataClient.filter((item: any) => {
         return item.role === "client"
     })
-
-    const navigation = useNavigation()
-
-
 
     return (
         <View style={styles.container}>

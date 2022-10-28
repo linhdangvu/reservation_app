@@ -41,7 +41,7 @@ export default function LoginForm() {
         if (!verifUsers(email, password)) errorsForm.push("Email or password not correct")
         setErrors(errorsForm);
         if (errorsForm.length == 0) {
-            login({ password: password, email: email })
+            login({ email: email, password: password })
         }
     }
 
