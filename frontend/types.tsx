@@ -23,6 +23,8 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   ChatBox: undefined;
+  CheckEmail: undefined;
+  ChangePassword: undefined;
   // Panier: undefined;
 };
 

@@ -38,11 +38,13 @@ export default function InscriptionForm() {
 
     const verifLogin = () => {
         let errorPassword = verifPassword(password),
+            errorPasswordC = verifPassword(passwordconfirm),
             errorEmail = verifEmail(email);
         let errorsForm = [];
         if (lastname == "") errorsForm.push("Write your lastname");
         if (firstname == "") errorsForm.push("Write your firstname");
         if (errorPassword != "") errorsForm.push(errorPassword);
+        if (errorPasswordC != "") errorsForm.push(errorPasswordC);
         if (errorEmail != "") errorsForm.push(errorEmail)
         if (password !== passwordconfirm) errorsForm.push("Password is not the same")
         if (verifUsers(email, password)) errorsForm.push("Email or password exit")
